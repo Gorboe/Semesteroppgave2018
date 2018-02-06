@@ -1,0 +1,30 @@
+
+What to do.
+
+Core
+-2D brett 				(Anders)
+-Avatar, brukeravatar (spritesheet)	(Otthar)
+-Bevegelse, piltaster. (mus)		(Anders)
+-Fientlig objekt, ved treff død		(Otthar)
+-Game over melding			(Kristoffer)
+-Pause, start på nytt			(Kristoffer)
+-Lagring av spill			(Kristoffer)
+
+Vidregående
+-Forskjellige nivåer
+-Ulike fiender
+-Lyd, musikk
+-Hp
+-Power ups
+-se pacman og space invaders
+
+
+
+Forslag: 
+- "Flappy birds", kanskje med coins og mulighet til å oppgradere looks. Lagring av det automatisk. 
+- Snake
+- Jumper game. Autojump climber spill. Der det kanskje faller fiender, du kan komme til nye nivåer. Checkpoints?
+- Temple run. 
+- Shooter platform. (kanskje litt vanskelig?)
+- 1 mot 1 spill. (2player)
+ 
