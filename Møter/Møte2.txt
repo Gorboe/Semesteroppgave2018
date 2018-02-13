@@ -1,0 +1,36 @@
+Tirsdag:
+13.02.2018
+
+
+1 Risikoanalyse - 
+
+Generelt: Andre obligatoriske oppgaver. Lav risiko, alle gruppemedlemmer
+føler de har kontroll over dette. 
+
+Kristoffer - lav risiko Påskeferie(24-28) kan uansett jobber over nett.
+
+Otthar - lav risiko Påskeferie(24-28) kan uansett jobber over nett.
+Jobber som trener.
+
+Anders - lav risiko Påskeferie(24-28) kan uansett jobber over nett.
+
+Planen er å møtes fast på tirsdager, og eventuelt utvide senere. Alle
+har mulighet til dette, med mindre noe uventet skjer. Lav risikofylt gruppe.
+
+
+2 Arbeids- og prosjektplan
+
+-2D-sidescroller. (kan lage gravity).
+-starter som et helikopter har muligheten til å skyte fientlige objekter.
+-Fientlige Kamikaze fly. (dodging) Mulig utvidelse til at de også skyter
+tilbake
+-Main menu, Start game, Settings, Load game, Help. (Screentutorial ved 
+oppstart). 
+-Flere maps kjøp av upgrades mellom maps. Eller en evigvarende der du grinder
+penger for oppgraderinger som du kan kjøpe når du dør. 
+(typ hill climb racing)
+-Basic lyder. Bakgrunnsmusikk. 
+-Starte med 1liv per gjennomgang (mulig utvidelse med hp)
+-Oppgradering av skins(starter med trehelikopter som skyter kongler)
+(ender opp med gull helikopter som skyter gullbarer)
+- 1player mot maskin. 
