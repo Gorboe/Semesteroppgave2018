@@ -1,4 +1,6 @@
-package sample;
+package sample.Core;
+
+import sample.Core.Game;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package sample;
+package sample.Core;
 
 public class Vector2D {
 
