@@ -1,0 +1,14 @@
+Tirsdag:
+06.03.2018
+
+Til neste gang!
+-Åpne spillet fullscreen (Anders) (presenteres neste gang)
+-Startmeny, pausemeny (Kristoffer) (presenteres neste gang)
+-Spritesheet (Otthar) (presentere noe neste gang?)
+-Lyd (Otthar) (Anders) (sjekke litt ut bare, ikke ferdig produkt)
+
+Videre
+-Spritesheet (Otthar)
+-Upgrade meny (Otthar)
+-Upgrade av spillet generelt (alle) viktig!
+-Save (Anders)(Kristoffer)
