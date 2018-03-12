@@ -60,7 +60,7 @@ public class Game extends GameEngine {
     }
 
     private void keyPressedEvent(KeyEvent e){
-        if(e.getCode() == KeyCode.RIGHT){
+        if(e.getCode() == KeyCode.RIGHT || e.getCode() == KeyCode.D){
             //System.out.println("Right");
             player.setVelocity(new Point2D(xSpeed,0));
             rightActive = true;
@@ -69,7 +69,7 @@ public class Game extends GameEngine {
             }else if(downActive){
                 player.setVelocity(new Point2D(xSpeed,ySpeed));
             }
-        }else if(e.getCode() == KeyCode.LEFT){
+        }else if(e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.A){
             //System.out.println("Left");
             player.setVelocity(new Point2D(-xSpeed,0));
             leftActive = true;
@@ -80,7 +80,7 @@ public class Game extends GameEngine {
             }
         }
 
-        if(e.getCode() == KeyCode.UP){
+        if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.W){
             //System.out.println("Up");
             player.setVelocity(new Point2D(0,-ySpeed));
             upActive = true;
@@ -89,7 +89,7 @@ public class Game extends GameEngine {
             }else if(leftActive){
                 player.setVelocity(new Point2D(-xSpeed, -ySpeed));
             }
-        }else if(e.getCode() == KeyCode.DOWN){
+        }else if(e.getCode() == KeyCode.DOWN || e.getCode() == KeyCode.S){
             //System.out.println("Down");
             player.setVelocity(new Point2D(0,ySpeed));
             downActive = true;
@@ -102,7 +102,7 @@ public class Game extends GameEngine {
     }
 
     private void keyReleasedEvent(KeyEvent e){
-        if(e.getCode() == KeyCode.RIGHT){
+        if(e.getCode() == KeyCode.RIGHT || e.getCode() == KeyCode.D){
             rightActive = false;
             player.setVelocity(new Point2D(0, 0));
             if(upActive){
@@ -110,7 +110,7 @@ public class Game extends GameEngine {
             }else if(downActive){
                 player.setVelocity(new Point2D(0, ySpeed));
             }
-        }else if(e.getCode() == KeyCode.LEFT){
+        }else if(e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.A){
             leftActive = false;
             player.setVelocity(new Point2D(0,0));
             if(upActive){
@@ -120,7 +120,7 @@ public class Game extends GameEngine {
             }
         }
 
-        if(e.getCode() == KeyCode.UP){
+        if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.W){
             upActive = false;
             player.setVelocity(new Point2D(0,0));
             if(rightActive){
@@ -128,7 +128,7 @@ public class Game extends GameEngine {
             }else if(leftActive){
                 player.setVelocity(new Point2D(-xSpeed, 0));
             }
-        }else if(e.getCode() == KeyCode.DOWN){
+        }else if(e.getCode() == KeyCode.DOWN || e.getCode() == KeyCode.S){
             downActive = false;
             player.setVelocity(new Point2D(0,0));
             if(rightActive){

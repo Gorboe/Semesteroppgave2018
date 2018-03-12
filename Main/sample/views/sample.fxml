@@ -1,4 +1,7 @@
 <?import javafx.scene.layout.GridPane?>
-<GridPane fx:controller="sample.Core.Controller" xmlns:fx="http://javafx.com/fxml" prefHeight="800" prefWidth="800">
-
+<?import javafx.stage.Screen?>
+<GridPane fx:controller="sample.Core.Controller" xmlns:fx="http://javafx.com/fxml" prefWidth="${screen.visualBounds.width}" prefHeight="${screen.visualBounds.height}">
+    <fx:define>
+        <Screen fx:factory="getPrimary" fx:id="screen"/>
+    </fx:define>
 </GridPane>

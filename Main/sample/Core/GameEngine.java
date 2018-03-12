@@ -20,7 +20,7 @@ public abstract class GameEngine {
     public int getHeight(){return height;}
     public int getWidth(){return width;}
     public GridPane getWindow(){return window;}
-    public AnimationTimer getGameLoop() {return gameLoop;}
+    public AnimationTimer getGameLoop(){return gameLoop;}
 
     //AnimationTimer runs 60 times per second calls update() and draw()
     private void buildAndSetGameLoop(){
