@@ -1,0 +1,10 @@
+Tirsdag:
+13.03.2018
+
+Til neste gang:
+-Meny, pausemeny (Kristoffer)
+-Lyd (Kristoffer)
+-Spritesheet (Otthar)
+-Save, Load. (alle)
+-Backgroundmovingingame (Anders)
+-PlayerScreenBounds
