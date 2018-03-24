@@ -6,24 +6,27 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game extends GameEngine{
 
     //global
     private Image background = new Image("Main/Resources/Background/citybackground.jpg");
-    private Image heli1, heli2, heli3, heli4;
-    //private ImageView imageView;
-    private int test = 0;
     private Player player;
     private boolean rightActive, leftActive, upActive, downActive = false;
     private int xSpeed = 5;
     private int ySpeed = 5;
     private boolean normalRight = true;
     private boolean normalLeft = true;
-    private ImageView imageView = new ImageView();
+    private ImageView playerImageView = new ImageView();
+    private List<GameObject> bullets = new ArrayList<>();
 
-    public Game(GridPane window, int width, int height){
+    public Game(Pane window, int width, int height){
         super(window, width, height);
         createContent();
     }
@@ -32,27 +35,50 @@ public class Game extends GameEngine{
         createPlayer();
         getWindow().getScene().setOnKeyPressed(this::keyPressedEvent);
         getWindow().getScene().setOnKeyReleased(this::keyReleasedEvent);
+        getWindow().getScene().setOnMousePressed(this::mousePressedEvent);
     }
 
     public void createPlayer(){
-        player = new Player(imageView);
+        player = new Player(playerImageView);
         player.setVelocity(new Point2D(0,0));
-        addPlayer(player, 100, 100);
-        /*imageView = new ImageView();
-        heli1 = new Image("Main/Resources/heli-1.png");
-        heli2 = new Image("Main/Resources/heli-2.png");
-        heli3 = new Image("Main/Resources/heli-3.png");
-        heli4 = new Image("Main/Resources/heli-4.png");
-        imageView.setImage(heli1);
-        test = 1;
-        imageView.setPreserveRatio(true);
-        getWindow().getChildren().add(imageView);*/
+        addGameObject(player, 100, 100);
     }
 
-    private void addPlayer(Player player, double x, double y){
-        player.setX(x);
-        player.setY(y);
-        getWindow().getChildren().add(player.getPlayerImageView(imageView));
+    private void addGameObject(GameObject object, double x, double y){
+        object.getView().setTranslateX(x);
+        object.getView().setTranslateY(y);
+        getWindow().getChildren().add(object.getView());
+    }
+
+    private void addBullet(GameObject bullet, double x, double y){
+        bullets.add(bullet);
+        addGameObject(bullet, x, y);
+    }
+
+    private void mousePressedEvent(MouseEvent e){
+        Vector2D playerPosition, mousePosition, aimDirection;
+        double normalizedX, normalizedY;
+        Bullet bullet = new Bullet();
+        playerPosition = new Vector2D(player.getView().getTranslateX()+160, player.getView().getTranslateY()+65);
+        //System.out.println("x: " + player.getView().getTranslateX() + "   " + "y: " + player.getView().getTranslateY());
+
+        mousePosition = new Vector2D(e.getX(), e.getY());
+        //System.out.println("x: " + e.getX() + "  " + "y: " + e.getY());
+
+
+        aimDirection = subVector(playerPosition, mousePosition);
+        normalizedX = aimDirection.getX() / Math.sqrt(Math.pow(aimDirection.getX(), 2) + Math.pow(aimDirection.getY(), 2));
+        normalizedY = aimDirection.getY() / Math.sqrt(Math.pow(aimDirection.getX(), 2) + Math.pow(aimDirection.getY(), 2));
+
+       //System.out.println(normalizedX + "  " + normalizedY);
+        bullet.setVelocity(new Point2D( 3*xSpeed * normalizedX, 3*ySpeed * normalizedY));
+        addBullet(bullet, player.getView().getTranslateX()+160, player.getView().getTranslateY()+65);
+    }
+
+    private Vector2D subVector(Vector2D vector1, Vector2D vector2){
+        double newX = vector2.getX() - vector1.getX();
+        double newY = vector2.getY() - vector1.getY();
+        return new Vector2D(newX, newY);
     }
 
     private void keyPressedEvent(KeyEvent e){
@@ -157,12 +183,13 @@ public class Game extends GameEngine{
 
     protected void OnUpdate(){
         player.update();
+        bullets.forEach(GameObject::update);
     }
 
     protected void draw(){
         GraphicsContext graphicsContext = getGraphicsContext();
 
         graphicsContext.getCanvas().getGraphicsContext2D().drawImage(background, 0,0,getWindow().getWidth(), getWindow().getHeight());
-        player.updateAnimation(imageView);
+        player.updatePlayerAnimation(playerImageView);
     }
 }

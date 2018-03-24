@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -14,7 +15,7 @@ public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        GridPane window = new GridPane();
+        Pane window = new Pane();
         Scene scene = new Scene(window);
 
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
