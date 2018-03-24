@@ -11,8 +11,9 @@ import javafx.scene.layout.GridPane;
 public class Game extends GameEngine{
 
     //global
+    private Image background = new Image("Main/Resources/Background/citybackground.jpg");
     private Image heli1, heli2, heli3, heli4;
-    private ImageView imageView;
+    //private ImageView imageView;
     private int test = 0;
     private Player player;
     private boolean rightActive, leftActive, upActive, downActive = false;
@@ -20,6 +21,7 @@ public class Game extends GameEngine{
     private int ySpeed = 5;
     private boolean normalRight = true;
     private boolean normalLeft = true;
+    private ImageView imageView = new ImageView();
 
     public Game(GridPane window, int width, int height){
         super(window, width, height);
@@ -33,7 +35,7 @@ public class Game extends GameEngine{
     }
 
     public void createPlayer(){
-        player = new Player();
+        player = new Player(imageView);
         player.setVelocity(new Point2D(0,0));
         addPlayer(player, 100, 100);
         /*imageView = new ImageView();
@@ -50,7 +52,7 @@ public class Game extends GameEngine{
     private void addPlayer(Player player, double x, double y){
         player.setX(x);
         player.setY(y);
-        getWindow().getChildren().add(player.getPlayerImageView());
+        getWindow().getChildren().add(player.getPlayerImageView(imageView));
     }
 
     private void keyPressedEvent(KeyEvent e){
@@ -159,6 +161,8 @@ public class Game extends GameEngine{
 
     protected void draw(){
         GraphicsContext graphicsContext = getGraphicsContext();
-        player.updateAnimation();
+
+        graphicsContext.getCanvas().getGraphicsContext2D().drawImage(background, 0,0,getWindow().getWidth(), getWindow().getHeight());
+        player.updateAnimation(imageView);
     }
 }

@@ -1,8 +1,10 @@
 package Main;
 
 import javafx.application.Application;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main extends Application{
@@ -15,13 +17,22 @@ public class Main extends Application{
         GridPane window = new GridPane();
         Scene scene = new Scene(window);
 
-        Game game = new Game(window, 800, 800);
+        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+
+        //primaryStage.setX(primaryScreenBounds.getMinX());
+        //primaryStage.setY(primaryScreenBounds.getMinY());
+        //primaryStage.setWidth(primaryScreenBounds.getWidth());
+        //primaryStage.setHeight(primaryScreenBounds.getHeight());
+
+        Game game = new Game(window, (int)primaryScreenBounds.getMaxX(), (int)primaryScreenBounds.getMaxY()+50);
         game.getGameLoop().start();
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("The Game");
-        primaryStage.setResizable(false);
-        primaryStage.setFullScreen(true);
+        primaryStage.setResizable(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.show();
     }
+
+
 }
