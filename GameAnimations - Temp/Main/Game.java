@@ -7,7 +7,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -19,8 +18,8 @@ public class Game extends GameEngine{
     private Image background = new Image("Main/Resources/Background/citybackground.jpg");
     private Player player;
     private boolean rightActive, leftActive, upActive, downActive = false;
-    private int xSpeed = 5;
-    private int ySpeed = 5;
+    private final int playerSpeed = 5;
+    private final int bulletSpeed = 15;
     private boolean normalRight = true;
     private boolean normalLeft = true;
     private ImageView playerImageView = new ImageView();
@@ -71,7 +70,7 @@ public class Game extends GameEngine{
         normalizedY = aimDirection.getY() / Math.sqrt(Math.pow(aimDirection.getX(), 2) + Math.pow(aimDirection.getY(), 2));
 
        //System.out.println(normalizedX + "  " + normalizedY);
-        bullet.setVelocity(new Point2D( 3*xSpeed * normalizedX, 3*ySpeed * normalizedY));
+        bullet.setVelocity(new Point2D( bulletSpeed * normalizedX, bulletSpeed * normalizedY));
         addBullet(bullet, player.getView().getTranslateX()+160, player.getView().getTranslateY()+65);
     }
 
@@ -84,51 +83,51 @@ public class Game extends GameEngine{
     private void keyPressedEvent(KeyEvent e){
         if(e.getCode() == KeyCode.RIGHT || e.getCode() == KeyCode.D){
             //System.out.println("Right");
-            player.setVelocity(new Point2D(xSpeed,0));
+            player.setVelocity(new Point2D(playerSpeed,0));
             if(normalRight){
                 player.rotateRight();
                 normalRight = false;
-                player.setVelocity(new Point2D(xSpeed,0));
+                player.setVelocity(new Point2D(playerSpeed,0));
             }
             rightActive = true;
             if(upActive){
-                player.setVelocity(new Point2D(xSpeed,-ySpeed));
+                player.setVelocity(new Point2D(playerSpeed,-playerSpeed));
             }else if(downActive){
-                player.setVelocity(new Point2D(xSpeed,ySpeed));
+                player.setVelocity(new Point2D(playerSpeed,playerSpeed));
             }
         }else if(e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.A){
             //System.out.println("Left");
-            player.setVelocity(new Point2D(-xSpeed,0));
+            player.setVelocity(new Point2D(-playerSpeed,0));
             if(normalLeft){
                 player.rotateLeft();
                 normalLeft = false;
-                player.setVelocity(new Point2D(-xSpeed,0));
+                player.setVelocity(new Point2D(-playerSpeed,0));
             }
             leftActive = true;
             if(upActive){
-                player.setVelocity(new Point2D(-xSpeed,-ySpeed));
+                player.setVelocity(new Point2D(-playerSpeed,-playerSpeed));
             }else if(downActive){
-                player.setVelocity(new Point2D(-xSpeed,ySpeed));
+                player.setVelocity(new Point2D(-playerSpeed,playerSpeed));
             }
         }
 
         if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.W){
             //System.out.println("Up");
-            player.setVelocity(new Point2D(0,-ySpeed));
+            player.setVelocity(new Point2D(0,-playerSpeed));
             upActive = true;
             if(rightActive){
-                player.setVelocity(new Point2D(xSpeed, -ySpeed));
+                player.setVelocity(new Point2D(playerSpeed, -playerSpeed));
             }else if(leftActive){
-                player.setVelocity(new Point2D(-xSpeed, -ySpeed));
+                player.setVelocity(new Point2D(-playerSpeed, -playerSpeed));
             }
         }else if(e.getCode() == KeyCode.DOWN || e.getCode() == KeyCode.S){
             //System.out.println("Down");
-            player.setVelocity(new Point2D(0,ySpeed));
+            player.setVelocity(new Point2D(0,playerSpeed));
             downActive = true;
             if(rightActive){
-                player.setVelocity(new Point2D(xSpeed, ySpeed));
+                player.setVelocity(new Point2D(playerSpeed, playerSpeed));
             }else if(leftActive){
-                player.setVelocity(new Point2D(-xSpeed, ySpeed));
+                player.setVelocity(new Point2D(-playerSpeed, playerSpeed));
             }
         }
     }
@@ -143,9 +142,9 @@ public class Game extends GameEngine{
             }
             player.setVelocity(new Point2D(0, 0));
             if(upActive){
-                player.setVelocity(new Point2D(0, -ySpeed));
+                player.setVelocity(new Point2D(0, -playerSpeed));
             }else if(downActive){
-                player.setVelocity(new Point2D(0, ySpeed));
+                player.setVelocity(new Point2D(0, playerSpeed));
             }
         }else if(e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.A){
             leftActive = false;
@@ -156,9 +155,9 @@ public class Game extends GameEngine{
                 player.setVelocity(new Point2D(0,0));
             }
             if(upActive){
-                player.setVelocity(new Point2D(0, -ySpeed));
+                player.setVelocity(new Point2D(0, -playerSpeed));
             }else if(downActive){
-                player.setVelocity(new Point2D(0, ySpeed));
+                player.setVelocity(new Point2D(0, playerSpeed));
             }
         }
 
@@ -166,17 +165,17 @@ public class Game extends GameEngine{
             upActive = false;
             player.setVelocity(new Point2D(0,0));
             if(rightActive){
-                player.setVelocity(new Point2D(xSpeed, 0));
+                player.setVelocity(new Point2D(playerSpeed, 0));
             }else if(leftActive){
-                player.setVelocity(new Point2D(-xSpeed, 0));
+                player.setVelocity(new Point2D(-playerSpeed, 0));
             }
         }else if(e.getCode() == KeyCode.DOWN || e.getCode() == KeyCode.S){
             downActive = false;
             player.setVelocity(new Point2D(0,0));
             if(rightActive){
-                player.setVelocity(new Point2D(xSpeed, 0));
+                player.setVelocity(new Point2D(playerSpeed, 0));
             }else if(leftActive){
-                player.setVelocity(new Point2D(-xSpeed,0));
+                player.setVelocity(new Point2D(-playerSpeed,0));
             }
         }
     }
