@@ -184,11 +184,12 @@ public class Game extends GameEngine{
         player.update();
         bullets.forEach(GameObject::update);
     }
-
+Image enemy = new Image("Main/Resources/Enemy/enemy.png");
     protected void draw(){
         GraphicsContext graphicsContext = getGraphicsContext();
 
         graphicsContext.getCanvas().getGraphicsContext2D().drawImage(background, 0,0,getWindow().getWidth(), getWindow().getHeight());
+        graphicsContext.getCanvas().getGraphicsContext2D().drawImage(enemy, 50 ,50);
         player.updatePlayerAnimation(playerImageView);
     }
 }
