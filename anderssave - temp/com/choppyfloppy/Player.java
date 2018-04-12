@@ -8,20 +8,39 @@ import javafx.scene.shape.Rectangle;
 public class Player extends GameObject {
 
     private Rectangle screenBounds;
-    private double velocity;
+    private double velocityX;
+    private double velocityY;
 
     public Player(Sprite sprite, Vector2D position, Rectangle screenBounds){
         super(sprite, position);
         this.screenBounds = screenBounds;
-        velocity = 1;
+        velocityX = 0;
+        velocityY = 0;
     }
 
+    public double getVelocityX(){return velocityX;}
+    public double getVelocityY(){return velocityY;}
+    public void setVelocityX(double velocityX){this.velocityX = velocityX;}
+    public void setVelocityY(double velocityY){this.velocityY = velocityY;}
+
     public void update(){
-        /*
-        view.setTranslateX(view.getTranslateX() + velocity.getX());
-        view.setTranslateY(view.getTranslateY() + velocity.getY());
-        */
-        position.addX(velocity);
+
+        //checking x-axis bounds
+        if(position.getX() < 0){
+            position.setX(0);
+        }else if(position.getX() > screenBounds.getWidth() - sprite.getBounds().getWidth()){
+            position.setX(screenBounds.getWidth() - sprite.getBounds().getWidth());
+        }
+
+        //checking y-axis bounds
+        if(position.getY() < 0){
+            position.setY(0);
+        }else if(position.getY() > screenBounds.getHeight() - sprite.getBounds().getHeight()){
+            position.setY(screenBounds.getHeight() - sprite.getBounds().getHeight());
+        }
+
+        position.setX(position.getX() + velocityX);
+        position.setY(position.getY() + velocityY);
     }
 
     @Override
