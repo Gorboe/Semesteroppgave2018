@@ -3,6 +3,7 @@ package Main;
 import javafx.application.Application;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -19,13 +20,18 @@ public class Main extends Application{
 
         Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
 
-        Game game = new Game(window, (int)primaryScreenBounds.getMaxX(), (int)primaryScreenBounds.getMaxY()+50); //set til pc screen max width og height
+        //primaryStage.setX(primaryScreenBounds.getMinX());
+        //primaryStage.setY(primaryScreenBounds.getMinY());
+        //primaryStage.setWidth(primaryScreenBounds.getWidth());
+        //primaryStage.setHeight(primaryScreenBounds.getHeight());
+
+        Game game = new Game(window, (int)primaryScreenBounds.getMaxX(), (int)primaryScreenBounds.getMaxY()+50);
         game.getGameLoop().start();
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("The Game");
-        primaryStage.setResizable(true); //false ikke ønskelig at de kan endre dette
-        //primaryStage.setFullScreen(true); //esc for å exit fs. esc blir også for pausemeny.
+        primaryStage.setResizable(true);
+        //primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 
