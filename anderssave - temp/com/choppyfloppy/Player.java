@@ -1,27 +1,68 @@
 package com.choppyfloppy;
 
+import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 
 public class Player extends GameObject {
 
     private Rectangle screenBounds;
-    private double velocityX = 0;
-    private double velocityY = 0;
+    private double velocity = 5;
+    private boolean rightActive, leftActive, upActive, downActive = false;
 
     public Player(ImageView imageView, Vector2D position, Rectangle bounds, Rectangle screenBounds){
         super(imageView, position, bounds);
         this.screenBounds = screenBounds;
     }
 
-    public double getVelocityX(){return velocityX;}
-    public double getVelocityY(){return velocityY;}
-    public void setVelocityX(double velocityX){this.velocityX = velocityX;}
-    public void setVelocityY(double velocityY){this.velocityY = velocityY;}
-    public void setVelocity(double velocityX, double velocityY){this.velocityX = velocityX; this.velocityY = velocityY;}
+    public void keyPressedEvent(KeyEvent e){
+        if(e.getCode() == KeyCode.RIGHT){
+            rightActive = true;
+        }else if(e.getCode() == KeyCode.LEFT){
+            leftActive = true;
+        }
 
-    public void update(){
+        if(e.getCode() == KeyCode.UP){
+            upActive = true;
+        }else if(e.getCode() == KeyCode.DOWN){
+            downActive = true;
+        }
+    }
+
+    public void keyReleasedEvent(KeyEvent e){
+        if(e.getCode() == KeyCode.RIGHT){
+            rightActive = false;
+        }else if(e.getCode() == KeyCode.LEFT){
+            leftActive = false;
+        }
+
+        if(e.getCode() == KeyCode.UP){
+            upActive = false;
+        }else if(e.getCode() == KeyCode.DOWN){
+            downActive = false;
+        }
+    }
+
+    public void update(Scene scene){
+
+        scene.setOnKeyPressed(this::keyPressedEvent);
+        scene.setOnKeyReleased(this::keyReleasedEvent);
+
+        //movement
+        if(rightActive){
+            getPosition().setX(getPosition().getX() + velocity);
+        }else if(leftActive){
+            getPosition().setX(getPosition().getX() + -velocity);
+        }
+
+        if(upActive){
+            getPosition().setY(getPosition().getY() + -velocity);
+        }else if(downActive){
+            getPosition().setY(getPosition().getY() + velocity);
+        }
 
         //checking x-axis bounds
         if(getPosition().getX() < 0){
@@ -36,9 +77,6 @@ public class Player extends GameObject {
         }else if(getPosition().getY() > screenBounds.getHeight() - getBounds().getHeight()){
             getPosition().setY(screenBounds.getHeight() - getBounds().getHeight());
         }
-
-        getPosition().setX(getPosition().getX() + velocityX);
-        getPosition().setY(getPosition().getY() + velocityY);
     }
 
     @Override

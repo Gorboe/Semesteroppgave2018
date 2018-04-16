@@ -6,12 +6,17 @@ import javafx.scene.shape.Rectangle;
 
 public class Enemy extends GameObject {
 
-    private ImageView imageView;
-    private Vector2D position;
-    private Rectangle bounds;
-
     public Enemy(ImageView imageView, Vector2D position, Rectangle bounds){
         super(imageView, position, bounds);
+    }
+
+    public void enemyMovement(Enemy enemy, Player player){
+        final double enemySpeed = 1;
+
+        if(player.getPosition().getX() > enemy.getPosition().getX()){
+           //player.setVelocity();
+            //enemy.set
+        }
     }
 
     @Override
