@@ -42,6 +42,8 @@ public abstract class GameObject {
     public Rectangle getBounds(){return bounds;}
     public Vector2D getPosition(){return position;}
 
+    //we need a flip-image method.
+
     public void update(){}
 
     public abstract void draw(GraphicsContext gc);

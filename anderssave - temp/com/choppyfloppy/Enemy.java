@@ -6,26 +6,36 @@ import javafx.scene.shape.Rectangle;
 
 public class Enemy extends GameObject {
 
+    private boolean flipImage = false;
+
     public Enemy(ImageView imageView, Vector2D position, Rectangle bounds){
         super(imageView, position, bounds);
     }
 
-    public void enemyMovement(Enemy enemy, Player player){
-        final double enemySpeed = 1;
+    public void update(Enemy enemy, Player player) {
+        final double velocity = 1;
 
         if(player.getPosition().getX() > enemy.getPosition().getX()){
-           //player.setVelocity();
-            //enemy.set
+            enemy.getPosition().addX(velocity);
+        }else if(player.getPosition().getX() < enemy.getPosition().getX()){
+            enemy.getPosition().addX(-velocity);
+            flipImage = true;
+        }
+
+        if(player.getPosition().getY() > enemy.getPosition().getY()){
+            enemy.getPosition().addY(velocity);
+        }else if(player.getPosition().getY() < enemy.getPosition().getY()){
+            enemy.getPosition().addY(-velocity);
         }
     }
 
     @Override
-    public void update() {
-
-    }
-
-    @Override
     public void draw(GraphicsContext gc) {
+        if(flipImage){
+            gc.drawImage(getImageView().getImage(), getPosition().getX() + getBounds().getWidth(), getPosition().getY(), -getBounds().getWidth(), getBounds().getHeight());
+            flipImage = false;
+        }else
+
         gc.drawImage(getImageView().getImage(), getPosition().getX(), getPosition().getY());
     }
 }
