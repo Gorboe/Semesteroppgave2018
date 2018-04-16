@@ -2,6 +2,7 @@ package com.choppyfloppy;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -11,11 +12,14 @@ import javafx.scene.shape.Rectangle;
 
 public class Game extends GameEngine {
 
+    private Enemy enemy;
+    private ImageView enemyView = new ImageView();
+
     private Player player;
     private final double playerSpeed = 5;
     private boolean upActive, downActive, leftActive, rightActive = false;
     private Image background = new Image("com/choppyfloppy/Resources/Background/citybackground.jpg");
-    private Image playerimage;
+    private ImageView playerView = new ImageView();
 
     public Game(GridPane parent, int width, int height){
         super(parent, width, height);
@@ -89,12 +93,15 @@ public class Game extends GameEngine {
     }
 
     private void createPlayer(){
-        playerimage = new Image("com/choppyfloppy/resources/Helicopter/helicopter1.png");
-        Sprite playersprite = new Sprite("Player", playerimage, new Rectangle(playerimage.getWidth(), playerimage.getHeight()));
-        player = new Player(playersprite, Vector2D.Zero(), new Rectangle(0,0,getWidth(),getHeight()));
+        player = new Player(playerView, Vector2D.Zero(), new Rectangle(200, 70), new Rectangle(0,0,getWidth(),getHeight()));
+
+        enemy = new Enemy(enemyView, Vector2D.Zero(), new Rectangle(70, 48));
     }
 
     protected void OnUpdate(){
+        for(GameObject enemy: enemies){
+            enemy.enemyMovement(enemy);
+        }
         player.update();
     }
 
@@ -102,5 +109,8 @@ public class Game extends GameEngine {
         GraphicsContext graphicsContext = getGraphicsContext();
         graphicsContext.drawImage(background, 0,0, getWidth(), getHeight());
         player.draw(getGraphicsContext());
+        enemy.draw(getGraphicsContext());
+        enemy.updateAnimation(enemyView, "com/choppyfloppy/resources/Enemy/RedBird/frame-");
+        player.updateAnimation(playerView, "com/choppyfloppy/resources/Helicopter/helicopter");
     }
 }

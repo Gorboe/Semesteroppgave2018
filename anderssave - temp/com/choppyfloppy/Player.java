@@ -1,50 +1,48 @@
 package com.choppyfloppy;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
 public class Player extends GameObject {
 
     private Rectangle screenBounds;
-    private double velocityX;
-    private double velocityY;
+    private double velocityX = 0;
+    private double velocityY = 0;
 
-    public Player(Sprite sprite, Vector2D position, Rectangle screenBounds){
-        super(sprite, position);
+    public Player(ImageView imageView, Vector2D position, Rectangle bounds, Rectangle screenBounds){
+        super(imageView, position, bounds);
         this.screenBounds = screenBounds;
-        velocityX = 0;
-        velocityY = 0;
     }
 
     public double getVelocityX(){return velocityX;}
     public double getVelocityY(){return velocityY;}
     public void setVelocityX(double velocityX){this.velocityX = velocityX;}
     public void setVelocityY(double velocityY){this.velocityY = velocityY;}
+    public void setVelocity(double velocityX, double velocityY){this.velocityX = velocityX; this.velocityY = velocityY;}
 
     public void update(){
 
         //checking x-axis bounds
-        if(position.getX() < 0){
-            position.setX(0);
-        }else if(position.getX() > screenBounds.getWidth() - sprite.getBounds().getWidth()){
-            position.setX(screenBounds.getWidth() - sprite.getBounds().getWidth());
+        if(getPosition().getX() < 0){
+            getPosition().setX(0);
+        }else if(getPosition().getX() > screenBounds.getWidth() - getBounds().getWidth()){
+            getPosition().setX(screenBounds.getWidth() - getBounds().getWidth());
         }
 
         //checking y-axis bounds
-        if(position.getY() < 0){
-            position.setY(0);
-        }else if(position.getY() > screenBounds.getHeight() - sprite.getBounds().getHeight()){
-            position.setY(screenBounds.getHeight() - sprite.getBounds().getHeight());
+        if(getPosition().getY() < 0){
+            getPosition().setY(0);
+        }else if(getPosition().getY() > screenBounds.getHeight() - getBounds().getHeight()){
+            getPosition().setY(screenBounds.getHeight() - getBounds().getHeight());
         }
 
-        position.setX(position.getX() + velocityX);
-        position.setY(position.getY() + velocityY);
+        getPosition().setX(getPosition().getX() + velocityX);
+        getPosition().setY(getPosition().getY() + velocityY);
     }
 
     @Override
     public void draw(GraphicsContext gc){
-        gc.drawImage(sprite.getImage(), position.getX(), position.getY());
+        gc.drawImage(getImageView().getImage(), getPosition().getX(), getPosition().getY());
     }
 }
