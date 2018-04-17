@@ -15,7 +15,7 @@ public class Game extends GameEngine {
     private ImageView bulletView = new ImageView();
     private Vector2D playerPosition, mousePosition, aimDirection;
     private int checker = 0;
-
+    private int playerLife = 3;
     private Player player;
     private Image background = new Image("com/choppyfloppy/Resources/Background/citybackground.jpg");
     private ImageView playerView = new ImageView();
@@ -64,12 +64,20 @@ public class Game extends GameEngine {
 
     protected void OnUpdate(){
 
-        //if bullets hit enemies setAlive = false;
-        for(GameObject bullet: bullets){
-            for(GameObject enemy: enemies){
-                if(bullet.isColliding(enemy)){
+        //objects hitting eachother
+        for(GameObject enemy: enemies){
+            for(GameObject bullet: bullets){
+                if(enemy.isColliding(bullet)){
                     bullet.setAlive(false);
                     enemy.setAlive(false);
+                }
+            }
+            if(enemy.isColliding(player)){
+                enemy.setAlive(false);
+                playerLife--;
+                if(playerLife <= 0){
+                    getGameLoop().stop();
+                    //still need!! open pausemenu, give option to restart level.
                 }
             }
         }
@@ -93,7 +101,7 @@ public class Game extends GameEngine {
         //remove this later! checking the size of the bullets and enemies arrays every 2seconds
         checker++;
         if(checker == 120) {
-            System.out.println("Bullets: " + bullets.size() + "\nEnemies: " + enemies.size() + "\n");
+            System.out.println("The Game board\nBullets: " + bullets.size() + "\nEnemies: " + enemies.size() + "\n");
             checker = 0;
         }
     }

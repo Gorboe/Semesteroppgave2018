@@ -12,6 +12,7 @@ public class Player extends GameObject {
     private Rectangle screenBounds;
     private double velocity = 5;
     private boolean rightActive, leftActive, upActive, downActive = false;
+    private boolean tiltRight, tiltLeft = false;
 
     public Player(ImageView imageView, Vector2D position, Rectangle bounds, Rectangle screenBounds){
         super(imageView, position, bounds);
@@ -54,8 +55,10 @@ public class Player extends GameObject {
         //movement
         if(rightActive){
             getPosition().setX(getPosition().getX() + velocity);
+            tiltRight = true;
         }else if(leftActive){
             getPosition().setX(getPosition().getX() + -velocity);
+            tiltLeft = true;
         }
 
         if(upActive){
@@ -81,6 +84,11 @@ public class Player extends GameObject {
 
     @Override
     public void draw(GraphicsContext gc){
+        if(tiltRight){
+            gc.drawImage(getImageView().getImage(), getPosition().getX(), getPosition().getY());
+        }else if(tiltLeft){
+            gc.drawImage(getImageView().getImage(), getPosition().getX(), getPosition().getY());
+        }else
         gc.drawImage(getImageView().getImage(), getPosition().getX(), getPosition().getY());
     }
 }
