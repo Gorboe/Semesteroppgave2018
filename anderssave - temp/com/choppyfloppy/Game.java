@@ -2,20 +2,28 @@ package com.choppyfloppy;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Game extends GameEngine {
 
+    private Enemy enemy;
+
+    private ImageView enemyView = new ImageView();
+    //private ImageView bulletView;
+    //private Bullet bullet;
+    //private double fixedDirectionY;
+    //private double fixedDirectionX;
+
     private Player player;
-    private final double playerSpeed = 5;
-    private boolean upActive, downActive, leftActive, rightActive = false;
     private Image background = new Image("com/choppyfloppy/Resources/Background/citybackground.jpg");
-    private Image playerimage;
+    private ImageView playerView = new ImageView();
+    private List<Enemy> enemies = new ArrayList<>();
+    private List<Bullet> bullets = new ArrayList<>();
 
     public Game(GridPane parent, int width, int height){
         super(parent, width, height);
@@ -23,84 +31,56 @@ public class Game extends GameEngine {
     }
 
     private void createContent(){
+        //getCanvas().getScene().setOnMousePressed(this::mousePressedEvent);
         createPlayer();
-        getCanvas().getScene().setOnKeyPressed(this::keyPressedEvent);
-        getCanvas().getScene().setOnKeyReleased(this::keyReleasedEvent);
+        //Enemy enemy = new Enemy(enemyView, new Vector2D(600, 600), new Rectangle(70, 48));
+        //enemies.add(enemy);
     }
 
-    private void keyPressedEvent(KeyEvent e){
-        if(e.getCode() == KeyCode.RIGHT){
-            player.setVelocityX(playerSpeed);
-            //leftActive = false;
-            rightActive = true;
-            if(upActive){
-                player.setVelocityY(-playerSpeed);
-            }else if(downActive){
-                player.setVelocityY(playerSpeed);
-            }
-        }else if(e.getCode() == KeyCode.LEFT){
-            player.setVelocityX(-playerSpeed);
-            //rightActive = false;
-            leftActive = true;
-            if(upActive){
-                player.setVelocityY(-playerSpeed);
-            }else if(downActive){
-                player.setVelocityY(playerSpeed);
-            }
-        }
-
-        if(e.getCode() == KeyCode.UP){
-            player.setVelocityY(-playerSpeed);
-            //downActive = false;
-            upActive = true;
-            if(rightActive){
-                player.setVelocityX(playerSpeed);
-            }else if(leftActive){
-                player.setVelocityX(-playerSpeed);
-            }
-        }else if(e.getCode() == KeyCode.DOWN){
-            player.setVelocityY(playerSpeed);
-            //upActive = false;
-            downActive = true;
-            if(rightActive){
-                player.setVelocityX(playerSpeed);
-            }else if(leftActive){
-                player.setVelocityX(-playerSpeed);
-            }
-        }
-    }
-
-    private void keyReleasedEvent(KeyEvent e){
-        if(e.getCode() == KeyCode.RIGHT){
-            player.setVelocityX(0);
-            rightActive = false;
-        }else if(e.getCode() == KeyCode.LEFT){
-            player.setVelocityX(0);
-            leftActive = false;
-        }
-
-        if(e.getCode() == KeyCode.UP){
-            player.setVelocityY(0);
-            upActive = false;
-        }else if(e.getCode() == KeyCode.DOWN){
-            player.setVelocityY(0);
-            downActive = false;
-        }
-    }
 
     private void createPlayer(){
-        playerimage = new Image("com/choppyfloppy/resources/Helicopter/helicopter1.png");
-        Sprite playersprite = new Sprite("Player", playerimage, new Rectangle(playerimage.getWidth(), playerimage.getHeight()));
-        player = new Player(playersprite, Vector2D.Zero(), new Rectangle(0,0,getWidth(),getHeight()));
+        player = new Player(playerView, new Vector2D(200,200), new Rectangle(165, 70), new Rectangle(0,0,getWidth(),getHeight()));
+
+        enemy = new Enemy(enemyView, Vector2D.Zero(), new Rectangle(70, 48));
+        enemies.add(enemy);
     }
 
+    /*public void mousePressedEvent(MouseEvent e){
+        Vector2D mousePosition, aimDirection;
+
+        mousePosition = new Vector2D(e.getX(), e.getY());
+        aimDirection = subtractVector(player.getPosition(), mousePosition);
+
+        fixedDirectionX = aimDirection.getX() / Math.sqrt(Math.pow(aimDirection.getX(), 2) + Math.pow(aimDirection.getY(), 2));
+        fixedDirectionY = aimDirection.getY() / Math.sqrt(Math.pow(aimDirection.getX(), 2) + Math.pow(aimDirection.getY(), 2));
+
+        /*bullet = new Bullet(bulletView, new Vector2D(player.getPosition().getX(), player.getPosition().getY()), new Rectangle());
+        bullets.add(bullet);
+        bullet.getPosition().add(0,0);
+
+    } */
+
+    /*public Vector2D subtractVector(Vector2D vector1, Vector2D vector2){
+        double newVectorX = vector2.getX() - vector1.getX();
+        double newVectorY = vector2.getY() - vector1.getY();
+        return new Vector2D(newVectorX, newVectorY);
+    }*/
+
     protected void OnUpdate(){
-        player.update();
+        for(Enemy enemy: enemies){
+            enemy.update(enemy, player);
+        }
+        player.update(getCanvas().getScene());
+
+        //enemies.forEach(GameObject::update);
     }
 
     protected void draw(){
         GraphicsContext graphicsContext = getGraphicsContext();
         graphicsContext.drawImage(background, 0,0, getWidth(), getHeight());
         player.draw(getGraphicsContext());
+        enemy.draw(getGraphicsContext());
+        enemy.updateAnimation(enemyView, "com/choppyfloppy/resources/Enemy/RedBird/frame-");
+        player.updateAnimation(playerView, "com/choppyfloppy/resources/Helicopter/helicopter");
     }
 }

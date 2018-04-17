@@ -5,15 +5,15 @@ import javafx.scene.image.ImageView;
 
 public class Player extends GameObject{
 
-    private Image heli1 = new Image("Main/Resources/Helicopter/helicopter1.png");
-    private Image heli2 = new Image("Main/Resources/Helicopter/helicopter2.png");
-    private Image heli3 = new Image("Main/Resources/Helicopter/helicopter3.png");
-    private Image heli4 = new Image("Main/Resources/Helicopter/helicopter4.png");
-
+    private Image heli1, heli2, heli3, heli4;
     private int imageDelay = 0;
 
     public Player(ImageView imageView){
         super(imageView);
+        heli1 = new Image("Main/Resources/Helicopter/helicopter1.png");
+        heli2 = new Image("Main/Resources/Helicopter/helicopter2.png");
+        heli3 = new Image("Main/Resources/Helicopter/helicopter3.png");
+        heli4 = new Image("Main/Resources/Helicopter/helicopter4.png");
     }
 
 
