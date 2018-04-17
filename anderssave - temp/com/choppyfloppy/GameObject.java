@@ -11,6 +11,7 @@ public abstract class GameObject {
     private ImageView imageView;
     private Rectangle bounds;
     private int imageDelay = 0;
+    private boolean alive = true;
 
     public GameObject(ImageView imageView, Vector2D position, Rectangle bounds){
         this.imageView = imageView;
@@ -41,6 +42,15 @@ public abstract class GameObject {
     public ImageView getImageView(){return imageView;}
     public Rectangle getBounds(){return bounds;}
     public Vector2D getPosition(){return position;}
+    public boolean isAlive(){
+        return alive;
+    }
+    public boolean isDead(){
+        return !alive;
+    }
+    public void setAlive(boolean alive){
+        this.alive = alive;
+    }
 
     //we need a flip-image method.
 

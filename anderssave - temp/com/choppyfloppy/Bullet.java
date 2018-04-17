@@ -7,9 +7,11 @@ import javafx.scene.shape.Rectangle;
 public class Bullet extends GameObject{
 
     private double velocity = 5;
+    private Rectangle screenBounds;
 
-    public Bullet(ImageView imageView, Vector2D position, Rectangle bounds){
+    public Bullet(ImageView imageView, Vector2D position, Rectangle bounds, Rectangle screenBounds){
         super(imageView, position, bounds);
+        this.screenBounds = screenBounds;
     }
 
     private Vector2D subVector(Vector2D vector1, Vector2D vector2){
@@ -27,6 +29,19 @@ public class Bullet extends GameObject{
 
         getPosition().setX(getPosition().getX() + velocity * fixedDirectionX);
         getPosition().setY(getPosition().getY() + velocity * fixedDirectionY);
+
+        //logic for removing bullets outside the screen
+        if(getPosition().getX() < 0 - getBounds().getWidth()){
+            setAlive(false);
+        }else if(getPosition().getX() > screenBounds.getWidth()){
+            setAlive(false);
+        }
+
+        if(getPosition().getY() < 0 - getBounds().getHeight()){
+            setAlive(false);
+        }else if(getPosition().getY() > screenBounds.getHeight()){
+            setAlive(false);
+        }
     }
 
     public void draw(GraphicsContext gc) {

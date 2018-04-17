@@ -10,8 +10,6 @@ public abstract class GameEngine {
 
     private Canvas canvas;
     private AnimationTimer gameLoop;
-    private int highscore;
-    private int currentLevel;
 
     public GameEngine(GridPane parent, int width, int height){
         canvas = new Canvas(width, height);
@@ -21,15 +19,6 @@ public abstract class GameEngine {
 
     public int getWidth(){return (int)canvas.getWidth();}
     public int getHeight(){return (int)canvas.getHeight();}
-
-    public int getCurrentLevel() {
-        return currentLevel;
-    }
-
-    public int getHighscore() {
-        return highscore;
-    }
-
     public AnimationTimer getGameLoop(){return gameLoop;}
     public Canvas getCanvas(){return canvas;}
     protected GraphicsContext getGraphicsContext() {

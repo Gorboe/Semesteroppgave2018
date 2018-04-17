@@ -14,6 +14,7 @@ public class Game extends GameEngine {
     private ImageView enemyView = new ImageView();
     private ImageView bulletView = new ImageView();
     Vector2D playerPosition, mousePosition;
+    int checker = 0;
 
     private Player player;
     private Image background = new Image("com/choppyfloppy/Resources/Background/citybackground.jpg");
@@ -37,7 +38,7 @@ public class Game extends GameEngine {
     private void mousePressedEvent(MouseEvent e){
         playerPosition = new Vector2D(player.getPosition().getX(), player.getPosition().getY());
         mousePosition = new Vector2D(e.getX(), e.getY());
-        Bullet bullet = new Bullet(bulletView, playerPosition, new Rectangle(5,5)); //fix size later
+        Bullet bullet = new Bullet(bulletView, playerPosition, new Rectangle(50,45), new Rectangle(0, 0, getWidth(), getHeight())); //fix size later
         bullets.add(bullet);
         System.out.println("PlayerPosition: (" + (int)playerPosition.getX() + ", " +  (int)playerPosition.getY() +
                 ")\nMousePosition: (" + (int)mousePosition.getX() + ", " + (int)mousePosition.getY() + ")\n");
@@ -53,14 +54,23 @@ public class Game extends GameEngine {
 
     protected void OnUpdate(){
 
+        //need to fix removal of enemies!!
         //updates movement of every enemy
         for(Enemy enemy: enemies){
             enemy.update(enemy, player);
         }
 
-        //updates movement of every bullet
+        //updates movement of every bullet. removes those out of screenbounds
         for(Bullet bullet: bullets){
             bullet.update(playerPosition, mousePosition);
+        }
+        bullets.removeIf(GameObject::isDead);
+
+        //remove this later!
+        checker++;
+        if(checker == 120) {
+            System.out.println("Bullets: " + bullets.size() + "\nEnemies: " + enemies.size() + "\n");
+            checker = 0;
         }
 
         //updates player movement
