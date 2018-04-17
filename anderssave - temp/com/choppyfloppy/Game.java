@@ -11,13 +11,9 @@ import java.util.List;
 
 public class Game extends GameEngine {
 
-    private Enemy enemy;
-
     private ImageView enemyView = new ImageView();
-    //private ImageView bulletView;
-    //private Bullet bullet;
-    //private double fixedDirectionY;
-    //private double fixedDirectionX;
+    private ImageView bulletView = new ImageView();
+    Vector2D playerPosition, mousePosition;
 
     private Player player;
     private Image background = new Image("com/choppyfloppy/Resources/Background/citybackground.jpg");
@@ -31,56 +27,67 @@ public class Game extends GameEngine {
     }
 
     private void createContent(){
-        //getCanvas().getScene().setOnMousePressed(this::mousePressedEvent);
         createPlayer();
-        //Enemy enemy = new Enemy(enemyView, new Vector2D(600, 600), new Rectangle(70, 48));
-        //enemies.add(enemy);
+        getCanvas().getScene().setOnMousePressed(this::mousePressedEvent);
+
+        Enemy enemy = new Enemy(enemyView, new Vector2D(500, 500), new Rectangle(70, 48));
+        enemies.add(enemy);
+    }
+
+    private void mousePressedEvent(MouseEvent e){
+        playerPosition = new Vector2D(player.getPosition().getX(), player.getPosition().getY());
+        mousePosition = new Vector2D(e.getX(), e.getY());
+        Bullet bullet = new Bullet(bulletView, playerPosition, new Rectangle(5,5)); //fix size later
+        bullets.add(bullet);
+        System.out.println("PlayerPosition: (" + (int)playerPosition.getX() + ", " +  (int)playerPosition.getY() +
+                ")\nMousePosition: (" + (int)mousePosition.getX() + ", " + (int)mousePosition.getY() + ")\n");
     }
 
 
     private void createPlayer(){
         player = new Player(playerView, new Vector2D(200,200), new Rectangle(165, 70), new Rectangle(0,0,getWidth(),getHeight()));
 
-        enemy = new Enemy(enemyView, Vector2D.Zero(), new Rectangle(70, 48));
+        Enemy enemy = new Enemy(enemyView, Vector2D.Zero(), new Rectangle(70, 48));
         enemies.add(enemy);
     }
 
-    /*public void mousePressedEvent(MouseEvent e){
-        Vector2D mousePosition, aimDirection;
-
-        mousePosition = new Vector2D(e.getX(), e.getY());
-        aimDirection = subtractVector(player.getPosition(), mousePosition);
-
-        fixedDirectionX = aimDirection.getX() / Math.sqrt(Math.pow(aimDirection.getX(), 2) + Math.pow(aimDirection.getY(), 2));
-        fixedDirectionY = aimDirection.getY() / Math.sqrt(Math.pow(aimDirection.getX(), 2) + Math.pow(aimDirection.getY(), 2));
-
-        /*bullet = new Bullet(bulletView, new Vector2D(player.getPosition().getX(), player.getPosition().getY()), new Rectangle());
-        bullets.add(bullet);
-        bullet.getPosition().add(0,0);
-
-    } */
-
-    /*public Vector2D subtractVector(Vector2D vector1, Vector2D vector2){
-        double newVectorX = vector2.getX() - vector1.getX();
-        double newVectorY = vector2.getY() - vector1.getY();
-        return new Vector2D(newVectorX, newVectorY);
-    }*/
-
     protected void OnUpdate(){
+
+        //updates movement of every enemy
         for(Enemy enemy: enemies){
             enemy.update(enemy, player);
         }
+
+        //updates movement of every bullet
+        for(Bullet bullet: bullets){
+            bullet.update(playerPosition, mousePosition);
+        }
+
+        //updates player movement
         player.update(getCanvas().getScene());
 
-        //enemies.forEach(GameObject::update);
     }
 
     protected void draw(){
         GraphicsContext graphicsContext = getGraphicsContext();
+
+        //draw background
         graphicsContext.drawImage(background, 0,0, getWidth(), getHeight());
+
+        //draw player and update the animation
         player.draw(getGraphicsContext());
-        enemy.draw(getGraphicsContext());
-        enemy.updateAnimation(enemyView, "com/choppyfloppy/resources/Enemy/RedBird/frame-");
         player.updateAnimation(playerView, "com/choppyfloppy/resources/Helicopter/helicopter");
+
+        //draws every bullet and updates the animation of every bullet
+        for(Bullet bullet: bullets){
+            bullet.draw(getGraphicsContext());
+            bullet.updateAnimation(bulletView, "com/choppyfloppy/resources/Bullet/bullet-");
+        }
+
+        //draws every enemy and updates the animation of every enemy
+        for(Enemy enemy: enemies){
+            enemy.draw(getGraphicsContext());
+            enemy.updateAnimation(enemyView, "com/choppyfloppy/resources/Enemy/RedBird/frame-");
+        }
     }
 }
