@@ -11,13 +11,15 @@ import java.util.List;
 
 public class Game extends GameEngine {
 
-    private Enemy enemy;
     private ImageView enemyView = new ImageView();
+    private ImageView bulletView = new ImageView();
+    Vector2D playerPosition, mousePosition;
 
     private Player player;
     private Image background = new Image("com/choppyfloppy/Resources/Background/citybackground.jpg");
     private ImageView playerView = new ImageView();
     private List<Enemy> enemies = new ArrayList<>();
+    private List<Bullet> bullets = new ArrayList<>();
 
     public Game(GridPane parent, int width, int height){
         super(parent, width, height);
@@ -26,15 +28,26 @@ public class Game extends GameEngine {
 
     private void createContent(){
         createPlayer();
-        enemy = new Enemy(enemyView, new Vector2D(500, 500), new Rectangle(70, 48));
+        getCanvas().getScene().setOnMousePressed(this::mousePressedEvent);
+
+        Enemy enemy = new Enemy(enemyView, new Vector2D(500, 500), new Rectangle(70, 48));
         enemies.add(enemy);
+    }
+
+    private void mousePressedEvent(MouseEvent e){
+        playerPosition = new Vector2D(player.getPosition().getX(), player.getPosition().getY());
+        mousePosition = new Vector2D(e.getX(), e.getY());
+        Bullet bullet = new Bullet(bulletView, playerPosition, new Rectangle(5,5)); //fix size later
+        bullets.add(bullet);
+        System.out.println("PlayerPosition: (" + (int)playerPosition.getX() + ", " +  (int)playerPosition.getY() +
+                ")\nMousePosition: (" + (int)mousePosition.getX() + ", " + (int)mousePosition.getY() + ")\n");
     }
 
 
     private void createPlayer(){
         player = new Player(playerView, new Vector2D(200,200), new Rectangle(165, 70), new Rectangle(0,0,getWidth(),getHeight()));
 
-        enemy = new Enemy(enemyView, Vector2D.Zero(), new Rectangle(70, 48));
+        Enemy enemy = new Enemy(enemyView, Vector2D.Zero(), new Rectangle(70, 48));
         enemies.add(enemy);
     }
 
@@ -43,6 +56,11 @@ public class Game extends GameEngine {
         //updates movement of every enemy
         for(Enemy enemy: enemies){
             enemy.update(enemy, player);
+        }
+
+        //updates movement of every bullet
+        for(Bullet bullet: bullets){
+            bullet.update(playerPosition, mousePosition);
         }
 
         //updates player movement
@@ -59,6 +77,12 @@ public class Game extends GameEngine {
         //draw player and update the animation
         player.draw(getGraphicsContext());
         player.updateAnimation(playerView, "com/choppyfloppy/resources/Helicopter/helicopter");
+
+        //draws every bullet and updates the animation of every bullet
+        for(Bullet bullet: bullets){
+            bullet.draw(getGraphicsContext());
+            bullet.updateAnimation(bulletView, "com/choppyfloppy/resources/Bullet/bullet-");
+        }
 
         //draws every enemy and updates the animation of every enemy
         for(Enemy enemy: enemies){
