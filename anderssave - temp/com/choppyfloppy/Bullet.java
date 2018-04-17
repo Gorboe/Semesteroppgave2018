@@ -13,8 +13,8 @@ public class Bullet extends GameObject{
     }
 
     public void update(double fixedDirectionX, double fixedDirectionY) {
-        getPosition().setX(getPosition().getX() + velocity * fixedDirectionX);
-        getPosition().setX(getPosition().getX() + velocity * fixedDirectionY);
+        //getPosition().setX(getPosition().getX() + velocity * fixedDirectionX);
+        //getPosition().setX(getPosition().getX() + velocity * fixedDirectionY);
     }
 
     public void draw(GraphicsContext gc) {
