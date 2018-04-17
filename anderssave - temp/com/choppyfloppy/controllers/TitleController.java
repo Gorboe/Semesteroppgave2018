@@ -19,7 +19,7 @@ public class TitleController {
 
     private void startOnClick(){
         try{
-            Main.changeScene("gameview.fxml", 800, 600);
+            Main.changeScene("gameview.fxml", 1200, 800);
         }catch(IOException exception){
             System.out.println("feil");
         }

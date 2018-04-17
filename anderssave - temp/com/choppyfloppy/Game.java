@@ -13,8 +13,8 @@ public class Game extends GameEngine {
 
     private ImageView enemyView = new ImageView();
     private ImageView bulletView = new ImageView();
-    Vector2D playerPosition, mousePosition;
-    int checker = 0;
+    private Vector2D playerPosition, mousePosition, aimDirection;
+    private int checker = 0;
 
     private Player player;
     private Image background = new Image("com/choppyfloppy/Resources/Background/citybackground.jpg");
@@ -38,12 +38,22 @@ public class Game extends GameEngine {
     private void mousePressedEvent(MouseEvent e){
         playerPosition = new Vector2D(player.getPosition().getX(), player.getPosition().getY());
         mousePosition = new Vector2D(e.getX(), e.getY());
-        Bullet bullet = new Bullet(bulletView, playerPosition, new Rectangle(50,45), new Rectangle(0, 0, getWidth(), getHeight())); //fix size later
-        bullets.add(bullet);
-        System.out.println("PlayerPosition: (" + (int)playerPosition.getX() + ", " +  (int)playerPosition.getY() +
-                ")\nMousePosition: (" + (int)mousePosition.getX() + ", " + (int)mousePosition.getY() + ")\n");
-    }
 
+        aimDirection = subVector(new Vector2D(player.getPosition().getX() + player.getBounds().getWidth() - 10, player.getPosition().getY() + player.getBounds().getHeight() - 10), mousePosition);
+        double normalizedX = aimDirection.getX() / Math.sqrt(Math.pow(aimDirection.getX(), 2) + Math.pow(aimDirection.getY(), 2));
+        double normalizedY = aimDirection.getY() / Math.sqrt(Math.pow(aimDirection.getX(), 2) + Math.pow(aimDirection.getY(), 2));
+
+        Bullet bullet = new Bullet(bulletView, new Vector2D(player.getPosition().getX() + player.getBounds().getWidth() - 10, player.getPosition().getY() + player.getBounds().getHeight() - 10), new Rectangle(15,14), new Rectangle(0, 0, getWidth(), getHeight()));
+        bullets.add(bullet);
+        bullet.setVelocity(new Vector2D(normalizedX, normalizedY));
+
+        //System.out.println("PlayerPosition: (" + (int)playerPosition.getX() + ", " +  (int)playerPosition.getY() + ")\nMousePosition: (" + (int)mousePosition.getX() + ", " + (int)mousePosition.getY() + ")\n");
+    }
+    private Vector2D subVector(Vector2D vector1, Vector2D vector2){
+        double newVectorX = vector2.getX() - vector1.getX();
+        double newVectorY = vector2.getY() - vector1.getY();
+        return new Vector2D(newVectorX, newVectorY);
+    }
 
     private void createPlayer(){
         player = new Player(playerView, new Vector2D(200,200), new Rectangle(165, 70), new Rectangle(0,0,getWidth(),getHeight()));
@@ -54,28 +64,38 @@ public class Game extends GameEngine {
 
     protected void OnUpdate(){
 
-        //need to fix removal of enemies!!
-        //updates movement of every enemy
+        //if bullets hit enemies setAlive = false;
+        for(GameObject bullet: bullets){
+            for(GameObject enemy: enemies){
+                if(bullet.isColliding(enemy)){
+                    bullet.setAlive(false);
+                    enemy.setAlive(false);
+                }
+            }
+        }
+
+        //updates movement of every enemy. removes enemies hit by bullets
         for(Enemy enemy: enemies){
             enemy.update(enemy, player);
         }
+        enemies.removeIf(GameObject::isDead);
 
-        //updates movement of every bullet. removes those out of screenbounds
+        //updates movement of every bullet. removes bullets that are out of screenbounds
         for(Bullet bullet: bullets){
-            bullet.update(playerPosition, mousePosition);
+            bullet.update();
         }
         bullets.removeIf(GameObject::isDead);
 
-        //remove this later!
+        //updates player movement
+        player.update(getCanvas().getScene());
+
+
+        //remove this later! checking the size of the bullets and enemies arrays every 2seconds
         checker++;
         if(checker == 120) {
             System.out.println("Bullets: " + bullets.size() + "\nEnemies: " + enemies.size() + "\n");
             checker = 0;
         }
-
-        //updates player movement
-        player.update(getCanvas().getScene());
-
     }
 
     protected void draw(){

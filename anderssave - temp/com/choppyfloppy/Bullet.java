@@ -6,29 +6,23 @@ import javafx.scene.shape.Rectangle;
 
 public class Bullet extends GameObject{
 
-    private double velocity = 5;
+    private Vector2D velocity;
     private Rectangle screenBounds;
+    private final int bulletSpeed = 10;
 
     public Bullet(ImageView imageView, Vector2D position, Rectangle bounds, Rectangle screenBounds){
         super(imageView, position, bounds);
         this.screenBounds = screenBounds;
     }
 
-    private Vector2D subVector(Vector2D vector1, Vector2D vector2){
-        double newVectorX = vector2.getX() - vector1.getX();
-        double newVectorY = vector2.getY() - vector1.getY();
-        return new Vector2D(newVectorX, newVectorY);
-    }
+    public void setVelocity(Vector2D velocity){this.velocity = velocity;}
+    public Vector2D getVelocity(){return velocity;}
 
-    public void update(Vector2D playerPosition, Vector2D mousePosition) {
-        Vector2D aimDirection;
-        aimDirection = subVector(playerPosition, mousePosition);
-        double fixedDirectionX = aimDirection.getX() / Math.sqrt(Math.pow(aimDirection.getX(), 2) + Math.pow(aimDirection.getY(), 2));
-        double fixedDirectionY = aimDirection.getY() / Math.sqrt(Math.pow(aimDirection.getX(), 2) + Math.pow(aimDirection.getY(), 2));
+    public void update() {
 
-
-        getPosition().setX(getPosition().getX() + velocity * fixedDirectionX);
-        getPosition().setY(getPosition().getY() + velocity * fixedDirectionY);
+        //bullet movement
+        getPosition().setX(getPosition().getX() + velocity.getX() * bulletSpeed);
+        getPosition().setY(getPosition().getY() + velocity.getY() * bulletSpeed);
 
         //logic for removing bullets outside the screen
         if(getPosition().getX() < 0 - getBounds().getWidth()){
