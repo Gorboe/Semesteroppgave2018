@@ -24,7 +24,7 @@ public class Save {
     public Save() {
 
     }
-
+/*
     public static void createfile() {
         //Dette skriver en fil til mappen savefolder.txt
         try {
@@ -41,7 +41,7 @@ public class Save {
             e.printStackTrace();
         }
     }
-
+*/
 
 /*
                 try {
@@ -55,7 +55,7 @@ public class Save {
     public static void main(String[] args) {
 
         createsavefolder.createDirectoryIfNotExists();
-        createfile();
+        createsavefile.saveFile();
     }
 }
 

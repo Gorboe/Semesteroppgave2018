@@ -7,7 +7,7 @@ public class createsavefile {
 
     public static void saveFile(){
         try {
-            PrintWriter saveFile = new PrintWriter("C:\\Users\\krist\\IdeaProjects\\choppyfloppy\\saveFolder\\save.txt", "UTF-8");
+            PrintWriter saveFile = new PrintWriter("saveFolder/save.txt", "UTF-8");
             saveFile.close();
         }catch (IOException e){
             e.printStackTrace();
