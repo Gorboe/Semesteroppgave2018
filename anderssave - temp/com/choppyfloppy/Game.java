@@ -16,11 +16,14 @@ public class Game extends GameEngine {
     private Vector2D playerPosition, mousePosition, aimDirection;
     private int checker = 0;
     private int playerLife = 3;
+    private int killCount = 0;
+    private int levelCount = 1;
     private Player player;
-    private Image background = new Image("com/choppyfloppy/Resources/Background/citybackground.jpg");
+    //private Image background = new Image("com/choppyfloppy/Resources/Background/level-1.png");
     private ImageView playerView = new ImageView();
     private List<Enemy> enemies = new ArrayList<>();
     private List<Bullet> bullets = new ArrayList<>();
+    private GameLevel gameLevel;
 
     public Game(GridPane parent, int width, int height){
         super(parent, width, height);
@@ -28,11 +31,9 @@ public class Game extends GameEngine {
     }
 
     private void createContent(){
+        gameLevel = new GameLevel(new Image("com/choppyfloppy/Resources/Background/level-1.png"), 0.3);
         createPlayer();
         getCanvas().getScene().setOnMousePressed(this::mousePressedEvent);
-
-        Enemy enemy = new Enemy(enemyView, new Vector2D(500, 500), new Rectangle(70, 48));
-        enemies.add(enemy);
     }
 
     private void mousePressedEvent(MouseEvent e){
@@ -57,12 +58,52 @@ public class Game extends GameEngine {
 
     private void createPlayer(){
         player = new Player(playerView, new Vector2D(200,200), new Rectangle(165, 70), new Rectangle(0,0,getWidth(),getHeight()));
-
-        Enemy enemy = new Enemy(enemyView, Vector2D.Zero(), new Rectangle(70, 48));
-        enemies.add(enemy);
     }
 
     protected void OnUpdate(){
+
+        if(killCount >= 10){
+            levelCount++;
+            killCount = 0;
+        }
+
+        //level-changer
+        if(levelCount == 1) {
+            gameLevel = new GameLevel(new Image("com/choppyfloppy/Resources/Background/level-1.png"), 0.03);
+        }else if(levelCount == 2){
+            gameLevel = new GameLevel(new Image("com/choppyfloppy/Resources/Background/level-2.png"), 0.01);
+        }else if(levelCount == 3){
+            gameLevel = new GameLevel(new Image("com/choppyfloppy/Resources/Background/level-3.png"), 0.01);
+        }else if(levelCount == 4){
+            gameLevel = new GameLevel(new Image("com/choppyfloppy/Resources/Background/level-4.png"), 0.01);
+        }
+
+        //enemy-spawner
+        if(Math.random() < gameLevel.getSpawnrate()){
+            Enemy enemy = new Enemy(enemyView, new Vector2D(getWidth(), Math.random() * getHeight()), new Rectangle(70, 48));
+            enemies.add(enemy);
+        }
+
+        if(levelCount >= 2){
+            if(Math.random() < gameLevel.getSpawnrate()){
+                Enemy enemy = new Enemy(enemyView, new Vector2D(0, Math.random() * getHeight()), new Rectangle(70, 48));
+                enemies.add(enemy);
+            }
+        }
+
+        if(levelCount >= 3){
+            if(Math.random() < gameLevel.getSpawnrate()){
+                Enemy enemy = new Enemy(enemyView, new Vector2D(Math.random() * getWidth(), 0), new Rectangle(70, 48));
+                enemies.add(enemy);
+            }
+        }
+
+        if(levelCount >= 4){
+            if(Math.random() < gameLevel.getSpawnrate()){
+                Enemy enemy = new Enemy(enemyView, new Vector2D(Math.random() * getWidth(), getHeight()), new Rectangle(70, 48));
+                enemies.add(enemy);
+            }
+        }
 
         //objects hitting eachother
         for(GameObject enemy: enemies){
@@ -70,11 +111,13 @@ public class Game extends GameEngine {
                 if(enemy.isColliding(bullet)){
                     bullet.setAlive(false);
                     enemy.setAlive(false);
+                    killCount++;
                 }
             }
             if(enemy.isColliding(player)){
                 enemy.setAlive(false);
                 playerLife--;
+                killCount++;
                 if(playerLife <= 0){
                     getGameLoop().stop();
                     //still need!! open pausemenu, give option to restart level.
@@ -110,7 +153,7 @@ public class Game extends GameEngine {
         GraphicsContext graphicsContext = getGraphicsContext();
 
         //draw background
-        graphicsContext.drawImage(background, 0,0, getWidth(), getHeight());
+        graphicsContext.drawImage(gameLevel.getBackground(), 0,0, getWidth(), getHeight());
 
         //draw player and update the animation
         player.draw(getGraphicsContext());

@@ -20,29 +20,29 @@ public class Player extends GameObject {
     }
 
     public void keyPressedEvent(KeyEvent e){
-        if(e.getCode() == KeyCode.RIGHT){
+        if(e.getCode() == KeyCode.RIGHT || e.getCode() == KeyCode.D){
             rightActive = true;
-        }else if(e.getCode() == KeyCode.LEFT){
+        }else if(e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.A){
             leftActive = true;
         }
 
-        if(e.getCode() == KeyCode.UP){
+        if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.W){
             upActive = true;
-        }else if(e.getCode() == KeyCode.DOWN){
+        }else if(e.getCode() == KeyCode.DOWN || e.getCode() == KeyCode.S){
             downActive = true;
         }
     }
 
     public void keyReleasedEvent(KeyEvent e){
-        if(e.getCode() == KeyCode.RIGHT){
+        if(e.getCode() == KeyCode.RIGHT || e.getCode() == KeyCode.D){
             rightActive = false;
-        }else if(e.getCode() == KeyCode.LEFT){
+        }else if(e.getCode() == KeyCode.LEFT || e.getCode() == KeyCode.A){
             leftActive = false;
         }
 
-        if(e.getCode() == KeyCode.UP){
+        if(e.getCode() == KeyCode.UP || e.getCode() == KeyCode.W){
             upActive = false;
-        }else if(e.getCode() == KeyCode.DOWN){
+        }else if(e.getCode() == KeyCode.DOWN || e.getCode() == KeyCode.S){
             downActive = false;
         }
     }
