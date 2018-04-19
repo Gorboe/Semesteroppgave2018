@@ -1,0 +1,9 @@
+.menubutton{
+    -fx-text-fill: black;
+    -fx-border-color: green;
+
+}
+
+#pausemenu{
+    -fx-background-image: url("../img/apache_helicopter.jpg");
+}
