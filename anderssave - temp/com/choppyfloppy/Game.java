@@ -3,6 +3,8 @@ package com.choppyfloppy;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
@@ -64,6 +66,8 @@ public class Game extends GameEngine {
 
         if(killCount >= 10){
             levelCount++;
+            killCount = 0;
+        }else if(enemies.size() == 0 && bullets.size() == 0){ //dette må endres på, selv om det er liten sannsynlighet uten om restart at det er 0fiender og 0kuler på brettet
             killCount = 0;
         }
 
@@ -138,7 +142,7 @@ public class Game extends GameEngine {
         bullets.removeIf(GameObject::isDead);
 
         //updates player movement
-        player.update(getCanvas().getScene());
+        player.update(getCanvas().getScene(), bullets, enemies);
 
 
         //remove this later! checking the size of the bullets and enemies arrays every 2seconds

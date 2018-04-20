@@ -7,12 +7,17 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Player extends GameObject {
 
     private Rectangle screenBounds;
     private double velocity = 5;
     private boolean rightActive, leftActive, upActive, downActive = false;
     private boolean tiltRight, tiltLeft = false;
+    private boolean killAll = false;
 
     public Player(ImageView imageView, Vector2D position, Rectangle bounds, Rectangle screenBounds){
         super(imageView, position, bounds);
@@ -31,6 +36,11 @@ public class Player extends GameObject {
         }else if(e.getCode() == KeyCode.DOWN || e.getCode() == KeyCode.S){
             downActive = true;
         }
+
+        //temporary reset option
+        if(e.getCode() == KeyCode.P){
+            killAll = true;
+        }
     }
 
     public void keyReleasedEvent(KeyEvent e){
@@ -47,10 +57,16 @@ public class Player extends GameObject {
         }
     }
 
-    public void update(Scene scene){
+    public void update(Scene scene, List<Bullet> bullets, List<Enemy> enemies){
 
         scene.setOnKeyPressed(this::keyPressedEvent);
         scene.setOnKeyReleased(this::keyReleasedEvent);
+
+        if(killAll){
+            bullets.clear();
+            enemies.clear();
+            killAll = false;
+        }
 
         //movement
         if(rightActive){
