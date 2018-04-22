@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+
+<fx:root xmlns="http://javafx.com/javafx" fx:id="pausemenu" xmlns:fx="http://javafx.com/fxml" prefHeight="400.0" prefWidth="600.0" type="javafx.scene.layout.VBox" stylesheets="@pause.css" alignment="CENTER">
+
+    <Label styleClass="pauseMenu" text="PAUSE"/>
+
+    <Button fx:id="resumeButton" styleClass="menubutton" mnemonicParsing="false" text="Resume" onAction="#resumeClicked"/>
+    <Button fx:id="restartButton" styleClass="menubutton" mnemonicParsing="false" text="Restart" onAction="#restartClicked"/>
+    <Button fx:id="quitToMainButton" styleClass="menubutton" mnemonicParsing="false" text="Exit" onAction="#quitToMainClicked"/>
+
+</fx:root>
+
