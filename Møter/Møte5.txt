@@ -1,0 +1,7 @@
+Anders:
+-fix level greia
+-fix score ingame (se draw metode)
+
+Kristoffer:
+-fix pausemeny
+-save, load, filbehandling
