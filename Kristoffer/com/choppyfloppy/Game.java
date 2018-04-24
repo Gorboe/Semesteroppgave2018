@@ -26,10 +26,19 @@ public class Game extends GameEngine {
     private List<Enemy> enemies = new ArrayList<>();
     private List<Bullet> bullets = new ArrayList<>();
     private GameLevel gameLevel;
+    private boolean paused;
 
     public Game(GridPane parent, int width, int height){
         super(parent, width, height);
         createContent();
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
+    }
+
+    public boolean isPaused() {
+        return paused;
     }
 
     private void createContent(){
@@ -63,6 +72,10 @@ public class Game extends GameEngine {
     }
 
     protected void OnUpdate(){
+
+        if (paused){
+            return;
+        }
 
         if(killCount >= 10){
             levelCount++;

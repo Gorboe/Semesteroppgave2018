@@ -65,8 +65,6 @@ public class Player extends GameObject {
         if(killAll){
             bullets.clear();
             enemies.clear();
-            getPosition().setX(200);
-            getPosition().setY(200);
             killAll = false;
         }
 

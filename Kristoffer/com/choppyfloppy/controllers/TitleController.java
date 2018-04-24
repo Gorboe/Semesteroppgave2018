@@ -19,17 +19,21 @@ public class TitleController {
 
     private void startOnClick(){
         try{
-            Main.changeScene("gameview.fxml", 1200, 800);
+            Main.changeScene("gameview.fxml", 800, 800);
         }catch(IOException exception){
             System.out.println("feil");
         }
     }
 
     private void continueOnClick(){
-        System.out.println("funker");
+        System.out.println("Continnue funker");
     }
 
     private void exitOnClick(){
         Platform.exit();
     }
+
+
+
+
 }

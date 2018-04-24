@@ -2,8 +2,10 @@
 
 
 <?import javafx.scene.layout.*?>
+<?import com.choppyfloppy.views.pausemenu.GameMenu?>
 
-
-<GridPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.choppyfloppy.controllers.GameController" prefHeight="400.0" prefWidth="600.0">
-
+<?import javafx.scene.canvas.Canvas?>
+<GridPane fx:id="root" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.choppyfloppy.controllers.GameController" prefHeight="600.0" prefWidth="900.0">
+        <Canvas fx:id="canvas"></Canvas>
+        <GameMenu fx:id="gameMenu"></GameMenu>
 </GridPane>
