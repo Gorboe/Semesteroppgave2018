@@ -13,6 +13,8 @@ public class Enemy extends GameObject {
     }
 
     public void update(Enemy enemy, Player player) {
+
+        //Movement logic
         final double velocity = 1;
 
         if(player.getPosition().getX() > enemy.getPosition().getX()){

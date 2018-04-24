@@ -30,13 +30,8 @@ public class TitleMenu extends VBox {
     public void setOnStartClicked(Runnable onStartClicked) {
         this.onStartClicked = onStartClicked;
     }
-    public void setOnContinueClicked(Runnable onContinueClicked){
-        this.onContinueClicked = onContinueClicked;
-    }
-
-    public void setOnExitClicked(Runnable onExitClicked){
-        this.onExitClicked = onExitClicked;
-    }
+    public void setOnContinueClicked(Runnable onContinueClicked){this.onContinueClicked = onContinueClicked;}
+    public void setOnExitClicked(Runnable onExitClicked){this.onExitClicked = onExitClicked;}
 
     @FXML
     protected void startClicked(){

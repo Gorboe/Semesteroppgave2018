@@ -8,18 +8,14 @@ import java.nio.file.Paths;
 import java.nio.file.attribute.FileAttribute;
 
 public class Save {
-
+/*
     static int playerHp = 1;
     static int playerScore = 2000;
     static int currentLevel = 3;
-    int locPlayerX = 10;
-    int locPlayerY = 10;
+
 
     int[] savePlayer = {playerHp, playerScore, currentLevel};
-
-    int pHpLoc = 0;
-    int pSLoc = 1;
-    int cLLoc = 2;
+*/
 
     public Save() {
 
@@ -55,12 +51,12 @@ public class Save {
     public static void main(String[] args) {
 
         createsavefolder.createDirectoryIfNotExists();
-        createsavefile.saveFile();
+        //createsavefile.saveFile();
         loadgame.readFile();
 
 
-        // Klarer vi å hente datafelt fra game?
-        //
+        // Klarer jeg å hente datafelt fra game?
+
     }
 }
 

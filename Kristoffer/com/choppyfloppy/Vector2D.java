@@ -46,4 +46,5 @@ public class Vector2D {
     public static Vector2D Zero() {
         return new Vector2D(0,0);
     }
+
 }

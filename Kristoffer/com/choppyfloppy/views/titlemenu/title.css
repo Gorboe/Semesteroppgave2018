@@ -1,10 +1,5 @@
 .menubutton{
-     -fx-text-fill: black;
-     -fx-border-color: green;
+    -fx-text-fill: black;
+    -fx-border-color: green;
 
- }
-
-#startmenu{
-    -fx-background-color: red;
 }
-

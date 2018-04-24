@@ -9,6 +9,7 @@ public class createsavefile {
     static int currentLevel = 4;
 
     //legg til filename; saveFile(String filename){
+    //Lager savefile
 
     public static void saveFile(){
         try {

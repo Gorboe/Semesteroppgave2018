@@ -33,11 +33,11 @@ public class Main extends Application {
         Scene scene = new Scene(root, width, height);
 
         if(name.equals("gameview.fxml")){
-                Game game = new Game(root, width, height);
-                }
+            Game game = new Game(root, width, height);
+        }
 
-                primaryStage.setTitle("ChoppyFloppy");
-                primaryStage.setScene(scene);
-                primaryStage.show();
-                }
-                }
+        primaryStage.setTitle("ChoppyFloppy");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+}

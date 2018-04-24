@@ -19,7 +19,6 @@ public abstract class GameEngine {
 
     public int getWidth(){return (int)canvas.getWidth();}
     public int getHeight(){return (int)canvas.getHeight();}
-
     public AnimationTimer getGameLoop(){return gameLoop;}
     public Canvas getCanvas(){return canvas;}
     protected GraphicsContext getGraphicsContext() {
