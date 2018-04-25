@@ -1,15 +1,25 @@
 
 package com.choppyfloppy.saveload;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.FileAttribute;
+
 public class Save {
-/*
+
     static int playerHp = 1;
     static int playerScore = 2000;
     static int currentLevel = 3;
-
+    int locPlayerX = 10;
+    int locPlayerY = 10;
 
     int[] savePlayer = {playerHp, playerScore, currentLevel};
-*/
+
+    int pHpLoc = 0;
+    int pSLoc = 1;
+    int cLLoc = 2;
 
     public Save() {
 
@@ -46,11 +56,6 @@ public class Save {
 
         createsavefolder.createDirectoryIfNotExists();
         createsavefile.saveFile();
-        loadgame.readFile();
-
-
-        // Klarer jeg å hente datafelt fra game?
-
     }
 }
 

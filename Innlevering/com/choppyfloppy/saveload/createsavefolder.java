@@ -11,9 +11,7 @@ public class createsavefolder {
         try {
             if (!Files.exists(Paths.get("saveFolder"))) {
                 Files.createDirectory(Paths.get("saveFolder"));
-                System.out.println("mappe lages");
-            }else {
-                System.out.println("mappe eksisterer");
+                System.out.println("mappe lager");
             }
         } catch (IOException e){
             e.printStackTrace();

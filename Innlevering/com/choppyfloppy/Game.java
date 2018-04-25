@@ -25,12 +25,12 @@ public class Game extends GameEngine {
     private int killCount = 0;
     private int levelCount = 1;
     private Player player;
-    //private Image background = new Image("com/choppyfloppy/Resources/Background/level-1.png");
+    //private Image background = new Image("com/choppyfloppy/Resources/Background/level-1");
     private ImageView playerView = new ImageView();
     private List<Enemy> enemies = new ArrayList<>();
     private List<Bullet> bullets = new ArrayList<>();
-    private String gameLevel;
-    private double spawnRate = 0.02;
+    private Image gameLevel;
+    private double spawnRate = 0.015;
     private boolean paused;
 
     public int getLevelCount() {
@@ -55,7 +55,7 @@ public class Game extends GameEngine {
     }
 
     private void createContent(){
-        gameLevel = "com/choppyfloppy/Resources/Background/level-1.png";
+        gameLevel = new Image("com/choppyfloppy/Resources/Background/level-1.png");
         createPlayer();
         getCanvas().getScene().setOnMousePressed(this::mousePressedEvent);
     }
@@ -84,6 +84,19 @@ public class Game extends GameEngine {
         player = new Player(playerView, new Vector2D(200,200), new Rectangle(165, 70), new Rectangle(0,0,getWidth(),getHeight()));
     }
 
+    private void changeLevel(){
+        //level-changer
+        if(levelCount == 1) {
+            gameLevel = new Image("com/choppyfloppy/Resources/Background/level-1.png");
+        }else if(levelCount == 2){
+            gameLevel = new Image("com/choppyfloppy/Resources/Background/level-2.png");
+        }else if(levelCount == 3){
+            gameLevel = new Image("com/choppyfloppy/Resources/Background/level-3.png");
+        }else if(levelCount == 4){
+            gameLevel = new Image("com/choppyfloppy/Resources/Background/level-4.png");
+        }
+    }
+
     protected void OnUpdate(){
 
         if (paused){
@@ -92,20 +105,10 @@ public class Game extends GameEngine {
 
         if(killCount >= 10){
             levelCount++;
+            changeLevel();
             killCount = 0;
         }else if(enemies.size() == 0 && bullets.size() == 0){ //dette må endres på, selv om det er liten sannsynlighet uten om restart at det er 0fiender og 0kuler på brettet
             killCount = 0;
-        }
-
-        //level-changer
-        if(levelCount == 1) {
-            gameLevel = "com/choppyfloppy/Resources/Background/level-1.png";
-        }else if(levelCount == 2){
-            gameLevel = "com/choppyfloppy/Resources/Background/level-2.png";
-        }else if(levelCount == 3){
-            gameLevel = "com/choppyfloppy/Resources/Background/level-3.png";
-        }else if(levelCount == 4){
-            gameLevel = "com/choppyfloppy/Resources/Background/level-4.png";
         }
 
         //enemy-spawner
@@ -148,10 +151,6 @@ public class Game extends GameEngine {
                 enemy.setAlive(false);
                 playerLife--;
                 killCount++;
-                if(playerLife <= 0){
-                    //getGameLoop().stop();
-                    //still need!! open pausemenu, give option to restart level.
-                }
             }
         }
 
@@ -168,7 +167,7 @@ public class Game extends GameEngine {
         bullets.removeIf(GameObject::isDead);
 
         //updates player movement
-        player.update(getCanvas().getScene(), bullets, enemies);
+        player.update(getCanvas().getScene());
 
 
         //remove this later! checking the size of the bullets and enemies arrays every 2seconds
@@ -183,7 +182,7 @@ public class Game extends GameEngine {
         GraphicsContext graphicsContext = getGraphicsContext();
 
         //draw background
-        graphicsContext.drawImage(gameLevel.getBackground(), 0,0, getWidth(), getHeight());
+        graphicsContext.drawImage(gameLevel, 0,0, getWidth(), getHeight());
 
         //draw player and update the animation
         player.draw(getGraphicsContext());
