@@ -65,6 +65,16 @@ public class GameController {
     private void restartOnClick(){
         //set killscore = 0, set position = x= 10, y = 10, update score, load current level.
         System.out.println("restart");
+
+        try{
+            int currentLevel = Main.getGame().getLevelCount();
+            Main.changeScene("gameview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+            Main.getGame().setLevelCount(currentLevel);
+        }catch(IOException exception){
+            System.out.println("feil");
+        }
+
+        gameMenu.setVisible(false);
     }
 
     private void quitToMainOnClick(){

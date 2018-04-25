@@ -29,8 +29,17 @@ public class Game extends GameEngine {
     private ImageView playerView = new ImageView();
     private List<Enemy> enemies = new ArrayList<>();
     private List<Bullet> bullets = new ArrayList<>();
-    private GameLevel gameLevel;
+    private String gameLevel;
+    private double spawnRate = 0.02;
     private boolean paused;
+
+    public int getLevelCount() {
+        return levelCount;
+    }
+
+    public void setLevelCount(int levelCount) {
+        this.levelCount = levelCount;
+    }
 
     public Game(GridPane parent, int width, int height){
         super(parent, width, height);
@@ -46,7 +55,7 @@ public class Game extends GameEngine {
     }
 
     private void createContent(){
-        gameLevel = new GameLevel(new Image("com/choppyfloppy/Resources/Background/level-1.png"), 0.3);
+        gameLevel = "com/choppyfloppy/Resources/Background/level-1.png";
         createPlayer();
         getCanvas().getScene().setOnMousePressed(this::mousePressedEvent);
     }
@@ -90,37 +99,37 @@ public class Game extends GameEngine {
 
         //level-changer
         if(levelCount == 1) {
-            gameLevel = new GameLevel(new Image("com/choppyfloppy/Resources/Background/level-1.png"), 0.03);
+            gameLevel = "com/choppyfloppy/Resources/Background/level-1.png";
         }else if(levelCount == 2){
-            gameLevel = new GameLevel(new Image("com/choppyfloppy/Resources/Background/level-2.png"), 0.01);
+            gameLevel = "com/choppyfloppy/Resources/Background/level-2.png";
         }else if(levelCount == 3){
-            gameLevel = new GameLevel(new Image("com/choppyfloppy/Resources/Background/level-3.png"), 0.01);
+            gameLevel = "com/choppyfloppy/Resources/Background/level-3.png";
         }else if(levelCount == 4){
-            gameLevel = new GameLevel(new Image("com/choppyfloppy/Resources/Background/level-4.png"), 0.01);
+            gameLevel = "com/choppyfloppy/Resources/Background/level-4.png";
         }
 
         //enemy-spawner
-        if(Math.random() < gameLevel.getSpawnrate()){
+        if(Math.random() < spawnRate){
             Enemy enemy = new Enemy(enemyView, new Vector2D(getWidth(), Math.random() * getHeight()), new Rectangle(70, 48));
             enemies.add(enemy);
         }
 
         if(levelCount >= 2){
-            if(Math.random() < gameLevel.getSpawnrate()){
+            if(Math.random() < spawnRate){
                 Enemy enemy = new Enemy(enemyView, new Vector2D(0, Math.random() * getHeight()), new Rectangle(70, 48));
                 enemies.add(enemy);
             }
         }
 
         if(levelCount >= 3){
-            if(Math.random() < gameLevel.getSpawnrate()){
+            if(Math.random() < spawnRate){
                 Enemy enemy = new Enemy(enemyView, new Vector2D(Math.random() * getWidth(), 0), new Rectangle(70, 48));
                 enemies.add(enemy);
             }
         }
 
         if(levelCount >= 4){
-            if(Math.random() < gameLevel.getSpawnrate()){
+            if(Math.random() < spawnRate){
                 Enemy enemy = new Enemy(enemyView, new Vector2D(Math.random() * getWidth(), getHeight()), new Rectangle(70, 48));
                 enemies.add(enemy);
             }
