@@ -1,5 +1,6 @@
 package com.choppyfloppy;
 
+import com.choppyfloppy.controllers.GameController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -7,7 +8,10 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +21,7 @@ public class Game extends GameEngine {
     private ImageView bulletView = new ImageView();
     private Vector2D playerPosition, mousePosition, aimDirection;
     private int checker = 0;
-    private int playerLife = 9993;
+    private int playerLife = 3;
     private int killCount = 0;
     private int levelCount = 1;
     private Player player;
@@ -136,7 +140,7 @@ public class Game extends GameEngine {
                 playerLife--;
                 killCount++;
                 if(playerLife <= 0){
-                    getGameLoop().stop();
+                    //getGameLoop().stop();
                     //still need!! open pausemenu, give option to restart level.
                 }
             }
@@ -186,6 +190,15 @@ public class Game extends GameEngine {
         for(Enemy enemy: enemies){
             enemy.draw(getGraphicsContext());
             enemy.updateAnimation(enemyView, "com/choppyfloppy/resources/Enemy/RedBird/frame-");
+        }
+
+        if(playerLife <= 0) {
+            graphicsContext.setFill(Color.BLACK);
+            graphicsContext.fillRect(0, 0, getWidth(), getHeight());
+            graphicsContext.setFill(Color.WHITE);
+            graphicsContext.setFont(Font.font("SERIF"));
+            graphicsContext.setFont(Font.font(25));
+            graphicsContext.fillText("GAME OVER! Press ESCAPE and restart to try again", getWidth() / 2 - 250, getHeight() / 2);
         }
     }
 }
