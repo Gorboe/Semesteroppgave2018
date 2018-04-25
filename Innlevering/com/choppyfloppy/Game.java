@@ -32,6 +32,7 @@ public class Game extends GameEngine {
     private Image gameLevel;
     private double spawnRate = 0.015;
     private boolean paused;
+    private boolean restartCheck = true;
 
     public int getLevelCount() {
         return levelCount;
@@ -55,7 +56,7 @@ public class Game extends GameEngine {
     }
 
     private void createContent(){
-        gameLevel = new Image("com/choppyfloppy/Resources/Background/level-1.png");
+        changeLevel();
         createPlayer();
         getCanvas().getScene().setOnMousePressed(this::mousePressedEvent);
     }
@@ -99,6 +100,11 @@ public class Game extends GameEngine {
 
     protected void OnUpdate(){
 
+        if(restartCheck){
+            changeLevel();
+            restartCheck = false;
+        }
+
         if (paused){
             return;
         }
@@ -106,8 +112,6 @@ public class Game extends GameEngine {
         if(killCount >= 10){
             levelCount++;
             changeLevel();
-            killCount = 0;
-        }else if(enemies.size() == 0 && bullets.size() == 0){ //dette må endres på, selv om det er liten sannsynlighet uten om restart at det er 0fiender og 0kuler på brettet
             killCount = 0;
         }
 
