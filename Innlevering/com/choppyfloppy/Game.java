@@ -17,7 +17,7 @@ public class Game extends GameEngine {
     private ImageView bulletView = new ImageView();
     private Vector2D playerPosition, mousePosition, aimDirection;
     private int checker = 0;
-    private int playerLife = 3;
+    private int playerLife = 9993;
     private int killCount = 0;
     private int levelCount = 1;
     private Player player;

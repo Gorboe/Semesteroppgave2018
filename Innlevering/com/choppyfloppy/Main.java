@@ -3,8 +3,10 @@ package com.choppyfloppy;
 import com.choppyfloppy.controllers.GameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,14 +18,14 @@ public class Main extends Application {
     }
 
     private static Stage primaryStage;
-
-    public static final int SCREEN_WIDTH = 500;
-    public static final int SCREEN_HEIGHT = 500;
+    private static Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+    public static final int SCREEN_WIDTH = (int)primaryScreenBounds.getMaxX();
+    public static final int SCREEN_HEIGHT = (int)primaryScreenBounds.getMaxY();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         Main.primaryStage = primaryStage;
-        changeScene("titleview.fxml", 500, 500);
+        changeScene("titleview.fxml", SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
     private static Game game;
