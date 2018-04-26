@@ -98,24 +98,7 @@ public class Game extends GameEngine {
         }
     }
 
-    protected void OnUpdate(){
-
-        if(restartCheck){
-            changeLevel();
-            restartCheck = false;
-        }
-
-        if (paused){
-            return;
-        }
-
-        if(killCount >= 10){
-            levelCount++;
-            changeLevel();
-            killCount = 0;
-        }
-
-        //enemy-spawner
+    private void spawnEnemies(){
         if(Math.random() < spawnRate){
             Enemy enemy = new Enemy(enemyView, new Vector2D(getWidth(), Math.random() * getHeight()), new Rectangle(70, 48));
             enemies.add(enemy);
@@ -140,7 +123,34 @@ public class Game extends GameEngine {
                 Enemy enemy = new Enemy(enemyView, new Vector2D(Math.random() * getWidth(), getHeight()), new Rectangle(70, 48));
                 enemies.add(enemy);
             }
+            if(killCount >= 100){
+                System.out.println("BOSS SPAWN! :D");
+            }
         }
+    }
+
+    protected void OnUpdate(){
+
+        if(restartCheck){
+            changeLevel();
+            restartCheck = false;
+        }
+
+        if (paused){
+            return;
+        }
+
+        if(levelCount < 4){
+            if(killCount >= 10){
+                levelCount++;
+                changeLevel();
+                killCount = 0;
+            }
+        }
+
+
+        //enemy-spawner
+        spawnEnemies();
 
         //objects hitting eachother
         for(GameObject enemy: enemies){

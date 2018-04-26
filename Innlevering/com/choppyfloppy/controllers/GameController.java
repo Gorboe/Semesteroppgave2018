@@ -70,9 +70,6 @@ public class GameController {
             int currentLevel = Main.getGame().getLevelCount();
             Main.changeScene("gameview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
             Main.getGame().setLevelCount(currentLevel);
-            if(currentLevel > 4){
-                Main.getGame().setLevelCount(4);
-            }
         }catch(IOException exception){
             System.out.println("feil");
         }
