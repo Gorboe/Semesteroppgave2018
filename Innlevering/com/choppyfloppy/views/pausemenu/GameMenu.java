@@ -12,6 +12,7 @@ public class GameMenu extends VBox {
         private Runnable onRestartClicked;
         private Runnable onQuitToMainClicked;
         private Runnable onExitClicked;
+        private Runnable onSaveClicked;
 
         public GameMenu() {
 
@@ -36,6 +37,10 @@ public class GameMenu extends VBox {
             this.onRestartClicked = onRestartClicked;
         }
 
+        public void setOnSaveClicked(Runnable onRestartClicked) {
+        this.onSaveClicked = onSaveClicked;
+    }
+
         public void setOnQuitToMainClicked(Runnable onQuitToMainMenuClicked) { this.onQuitToMainClicked = onQuitToMainMenuClicked; }
 
         public void setOnExitClicked(Runnable onExitClicked){
@@ -55,6 +60,13 @@ public class GameMenu extends VBox {
                 onRestartClicked.run();
             }
         }
+        @FXML
+        protected void saveClicked() {
+            if (onSaveClicked != null) {
+                onSaveClicked.run();
+            }
+        }
+
 
         @FXML
         protected void quitToMainMenuClicked() {

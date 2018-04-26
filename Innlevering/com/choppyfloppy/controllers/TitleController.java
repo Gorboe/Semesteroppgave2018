@@ -1,6 +1,7 @@
 package com.choppyfloppy.controllers;
 
 import com.choppyfloppy.Main;
+import com.choppyfloppy.saveload.loadgame;
 import com.choppyfloppy.views.titlemenu.TitleMenu;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -12,12 +13,12 @@ public class TitleController {
     @FXML private TitleMenu titleMenu;
 
     @FXML public void initialize(){
-        titleMenu.setOnStartClicked(this::startOnClick);
+        titleMenu.setOnNewGameClicked(this::newGameOnClick);
         titleMenu.setOnContinueClicked(this::continueOnClick);
         titleMenu.setOnExitClicked(this::exitOnClick);
     }
 
-    private void startOnClick(){
+    private void newGameOnClick(){
         try{
             Main.changeScene("gameview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
         }catch(IOException exception){
@@ -26,7 +27,7 @@ public class TitleController {
     }
 
     private void continueOnClick(){
-        System.out.println("Continnue funker");
+        loadgame.readFile();
     }
 
     private void exitOnClick(){

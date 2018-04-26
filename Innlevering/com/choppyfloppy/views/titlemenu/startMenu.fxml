@@ -9,9 +9,9 @@
     <fx:define>
         <Screen fx:factory="getPrimary" fx:id="screen"/>
     </fx:define>
-    <Label styleClass="titleMenuStart" text="TITTEL TIL SPILL" />
+    <Label styleClass="titleMenuStart" text="CHOPPY" />
 
-    <Button fx:id="startButton" styleClass="menubutton" mnemonicParsing="false" text="Start" onAction="#startClicked" />
+    <Button fx:id="newGameButton" styleClass="menubutton" mnemonicParsing="false" text="New Game" onAction="#newGameClicked" />
     <Button fx:id="fortsettButton" styleClass="menubutton" mnemonicParsing="false" text="Continue" onAction="#continueClicked"/>
     <Button fx:id="exitButton" styleClass="menubutton" mnemonicParsing="false" text="Exit" onAction="#exitClicked"/>
 

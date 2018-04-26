@@ -2,6 +2,7 @@ package com.choppyfloppy.controllers;
 
 import com.choppyfloppy.Game;
 import com.choppyfloppy.Main;
+import com.choppyfloppy.saveload.createsavefile;
 import com.choppyfloppy.views.pausemenu.GameMenu;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -47,6 +48,7 @@ public class GameController {
 
         gameMenu.setOnResumeClicked(this::resumeOnClick);
         gameMenu.setOnRestartClicked(this::restartOnClick);
+        gameMenu.setOnSaveClicked(this::saveOnClick);
         gameMenu.setOnQuitToMainClicked(this::quitToMainOnClick);
         gameMenu.setOnExitClicked(this::exitOnClick);
 
@@ -75,6 +77,10 @@ public class GameController {
         }
 
         gameMenu.setVisible(false);
+    }
+
+    private void saveOnClick(){
+        createsavefile.saveFile();
     }
 
     private void quitToMainOnClick(){
