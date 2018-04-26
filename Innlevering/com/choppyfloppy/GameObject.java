@@ -59,9 +59,13 @@ public abstract class GameObject {
         //else if(A-top < B-top og A-top < B-top eller A-top > B-bot og A-bot > B-bot) return false
         //all other conditions equals bounds crossed, return true
 
-        if(getPosition().getX() < other.getPosition().getX() && getPosition().getX() + getBounds().getWidth() < other.getPosition().getX() || getPosition().getX() > other.getPosition().getX() + other.getBounds().getWidth() && getPosition().getX() + getBounds().getWidth() > other.getPosition().getX() + other.getBounds().getWidth()){
+        if(getPosition().getX() < other.getPosition().getX() && getPosition().getX() + getBounds().getWidth() < other.getPosition().getX()){
             return false;
-        }else if(getPosition().getY() < other.getPosition().getY() && getPosition().getY() + getBounds().getHeight() < other.getPosition().getY() || getPosition().getY() > other.getPosition().getY() + other.getBounds().getHeight() && getPosition().getY() + getBounds().getHeight() > other.getPosition().getY() + other.getBounds().getHeight()){
+        }else if(getPosition().getX() > other.getPosition().getX() + other.getBounds().getWidth() && getPosition().getX() + getBounds().getWidth() > other.getPosition().getX() + other.getBounds().getWidth()){
+            return false;
+        }else if(getPosition().getY() < other.getPosition().getY() && getPosition().getY() + getBounds().getHeight() < other.getPosition().getY()){
+            return false;
+        }else if(getPosition().getY() > other.getPosition().getY() + other.getBounds().getHeight() && getPosition().getY() + getBounds().getHeight() > other.getPosition().getY() + other.getBounds().getHeight()){
             return false;
         }else
 

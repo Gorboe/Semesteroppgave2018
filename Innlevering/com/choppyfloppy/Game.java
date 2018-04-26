@@ -154,7 +154,6 @@ public class Game extends GameEngine {
             if(enemy.isColliding(player)){
                 enemy.setAlive(false);
                 playerLife--;
-                killCount++;
             }
         }
 
