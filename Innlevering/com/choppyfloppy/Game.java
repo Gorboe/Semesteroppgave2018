@@ -89,12 +89,16 @@ public class Game extends GameEngine {
         //level-changer
         if(levelCount == 1) {
             gameLevel = new Image("com/choppyfloppy/Resources/Background/level-1.png");
+            enemies.clear();
         }else if(levelCount == 2){
             gameLevel = new Image("com/choppyfloppy/Resources/Background/level-2.png");
+            enemies.clear();
         }else if(levelCount == 3){
             gameLevel = new Image("com/choppyfloppy/Resources/Background/level-3.png");
+            enemies.clear();
         }else if(levelCount == 4){
             gameLevel = new Image("com/choppyfloppy/Resources/Background/level-4.png");
+            enemies.clear();
         }
     }
 
@@ -185,9 +189,9 @@ public class Game extends GameEngine {
             graphicsContext.setFill(Color.BLACK);
             graphicsContext.fillRect(0, 0, getWidth(), getHeight());
             graphicsContext.setFill(Color.WHITE);
-            graphicsContext.setFont(Font.font("SERIF"));
-            graphicsContext.setFont(Font.font(25));
+            graphicsContext.setFont(Font.font("SERIF", 25));
             graphicsContext.fillText("GAME OVER! Press ESCAPE and restart to try again", getWidth() / 2 - 250, getHeight() / 2);
+            getGameLoop().stop();
         }
     }
 }
