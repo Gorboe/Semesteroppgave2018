@@ -1,6 +1,7 @@
 package com.choppyfloppy.controllers;
 
 import com.choppyfloppy.Main;
+import com.choppyfloppy.saveload.createsavefolder;
 import com.choppyfloppy.saveload.loadgame;
 import com.choppyfloppy.views.titlemenu.TitleMenu;
 import javafx.application.Platform;
@@ -19,6 +20,7 @@ public class TitleController {
     }
 
     private void newGameOnClick(){
+
         try{
             Main.changeScene("gameview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
         }catch(IOException exception){

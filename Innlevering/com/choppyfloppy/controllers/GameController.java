@@ -3,6 +3,7 @@ package com.choppyfloppy.controllers;
 import com.choppyfloppy.Game;
 import com.choppyfloppy.Main;
 import com.choppyfloppy.saveload.createsavefile;
+import com.choppyfloppy.saveload.createsavefolder;
 import com.choppyfloppy.views.pausemenu.GameMenu;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -60,8 +61,9 @@ public class GameController {
     }
 
     private void resumeOnClick(){
-        //set visibility of menu = 0.
-        //start gameloop.
+        boolean paused = !Main.getGame().isPaused();
+        Main.getGame().setPaused(paused);
+        gameMenu.setVisible(paused);
     }
 
     private void restartOnClick(){
@@ -80,12 +82,13 @@ public class GameController {
     }
 
     private void saveOnClick(){
+        System.out.println("jegvirkersave");
         createsavefile.saveFile();
     }
 
     private void quitToMainOnClick(){
         try{
-            Main.changeScene("titleview.fxml", 800, 800);
+            Main.changeScene("titleview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
         } catch (IOException e) {
             e.printStackTrace();
         }

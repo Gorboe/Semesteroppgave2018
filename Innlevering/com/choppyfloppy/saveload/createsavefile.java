@@ -12,6 +12,7 @@ public class createsavefile {
     //Lager savefile
 
     public static void saveFile(){
+        System.out.println("Jeg virker (Save)");
         try {
             PrintWriter saveFile = new PrintWriter("saveFolder/save.txt", "UTF-8");
             saveFile.println(playerScore);

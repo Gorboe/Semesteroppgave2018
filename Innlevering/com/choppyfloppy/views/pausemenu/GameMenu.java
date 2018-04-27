@@ -37,7 +37,7 @@ public class GameMenu extends VBox {
             this.onRestartClicked = onRestartClicked;
         }
 
-        public void setOnSaveClicked(Runnable onRestartClicked) {
+        public void setOnSaveClicked(Runnable onSaveClicked) {
         this.onSaveClicked = onSaveClicked;
     }
 

@@ -9,7 +9,7 @@
 
     <Button fx:id="resumeButton" styleClass="menubutton" mnemonicParsing="false" text="Resume" onAction="#resumeClicked"/>
     <Button fx:id="restartButton" styleClass="menubutton" mnemonicParsing="false" text="Restart" onAction="#restartClicked"/>
-    <Button fx:id="saveButton" styleClass="menubutton" mnemonicParsing="false" text="Save" onAction="#resumeClicked"/>
+    <Button fx:id="saveButton" styleClass="menubutton" mnemonicParsing="false" text="Save" onAction="#saveClicked"/>
     <Button fx:id="quitToMainMenuButton" styleClass="menubutton" mnemonicParsing="false" text="Main menu" onAction="#quitToMainMenuClicked"/>
     <Button fx:id="exitButton" styleClass="menubutton" mnemonicParsing="false" text="Exit" onAction="#exitClicked"/>
 

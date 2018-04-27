@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 public class createsavefolder {
 
     public static void createDirectoryIfNotExists() {
+        System.out.println("Jeg virker(mappe)");
         //Hvis save folder eksisterer så fortsett, hvis ikke lages folderen.
         try {
             if (!Files.exists(Paths.get("saveFolder"))) {

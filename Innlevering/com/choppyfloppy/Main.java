@@ -1,6 +1,8 @@
 package com.choppyfloppy;
 
 import com.choppyfloppy.controllers.GameController;
+import com.choppyfloppy.saveload.createsavefile;
+import com.choppyfloppy.saveload.createsavefolder;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -10,6 +12,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Main extends Application {
 
@@ -25,8 +28,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Main.primaryStage = primaryStage;
+        createsavefolder.createDirectoryIfNotExists();
+        createsavefile.saveFile();
         changeScene("titleview.fxml", SCREEN_WIDTH, SCREEN_HEIGHT);
     }
+
+
 
     private static Game game;
 
@@ -50,6 +57,7 @@ public class Main extends Application {
             GameController gameController = loader.getController();
             gameController.init(scene);
         }
+
 
         primaryStage.setTitle("ChoppyFloppy");
         primaryStage.setScene(scene);
