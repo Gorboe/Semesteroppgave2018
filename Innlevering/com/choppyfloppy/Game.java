@@ -25,12 +25,12 @@ public class Game extends GameEngine {
     private int killCount = 0;
     private int levelCount = 1;
     private Player player;
+    private Enemy enemy = new Enemy(enemyView, Vector2D.Zero(), new Rectangle(70,48));
     //private Image background = new Image("com/choppyfloppy/Resources/Background/level-1");
     private ImageView playerView = new ImageView();
     private List<Enemy> enemies = new ArrayList<>();
     private List<Bullet> bullets = new ArrayList<>();
     private Image gameLevel;
-    private double spawnRate = 0.015;
     private boolean paused;
     private boolean restartCheck = true;
 
@@ -98,37 +98,6 @@ public class Game extends GameEngine {
         }
     }
 
-    private void spawnEnemies(){
-        if(Math.random() < spawnRate){
-            Enemy enemy = new Enemy(enemyView, new Vector2D(getWidth(), Math.random() * getHeight()), new Rectangle(70, 48));
-            enemies.add(enemy);
-        }
-
-        if(levelCount >= 2){
-            if(Math.random() < spawnRate){
-                Enemy enemy = new Enemy(enemyView, new Vector2D(0, Math.random() * getHeight()), new Rectangle(70, 48));
-                enemies.add(enemy);
-            }
-        }
-
-        if(levelCount >= 3){
-            if(Math.random() < spawnRate){
-                Enemy enemy = new Enemy(enemyView, new Vector2D(Math.random() * getWidth(), 0), new Rectangle(70, 48));
-                enemies.add(enemy);
-            }
-        }
-
-        if(levelCount >= 4){
-            if(Math.random() < spawnRate){
-                Enemy enemy = new Enemy(enemyView, new Vector2D(Math.random() * getWidth(), getHeight()), new Rectangle(70, 48));
-                enemies.add(enemy);
-            }
-            if(killCount >= 100){
-                System.out.println("BOSS SPAWN! :D");
-            }
-        }
-    }
-
     protected void OnUpdate(){
 
         if(restartCheck){
@@ -148,9 +117,8 @@ public class Game extends GameEngine {
             }
         }
 
-
         //enemy-spawner
-        spawnEnemies();
+        enemy.spawnEnemies(enemies, enemyView, levelCount);
 
         //objects hitting eachother
         for(GameObject enemy: enemies){
