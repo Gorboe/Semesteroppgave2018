@@ -19,20 +19,24 @@ public class Game extends GameEngine {
 
     private ImageView enemyView = new ImageView();
     private ImageView bulletView = new ImageView();
+    private ImageView powerupsView = new ImageView();
     private Vector2D playerPosition, mousePosition, aimDirection;
     private int checker = 0;
     private int playerLife = 3;
     private int killCount = 0;
+    private int scoreCount = 0;
     private int levelCount = 1;
     private Player player;
-    private Enemy enemy = new Enemy(enemyView, Vector2D.Zero(), new Rectangle(70,48));
-    //private Image background = new Image("com/choppyfloppy/Resources/Background/level-1");
+    private GameObjectSpawner gameObjectSpawner = new GameObjectSpawner();
     private ImageView playerView = new ImageView();
     private List<Enemy> enemies = new ArrayList<>();
     private List<Bullet> bullets = new ArrayList<>();
+    private List<PowerUp> powerUps = new ArrayList<>();
     private Image gameLevel;
     private boolean paused;
     private boolean restartCheck = true;
+
+    public int getScoreCount(){return scoreCount;}
 
     public int getLevelCount() {
         return levelCount;
@@ -122,7 +126,19 @@ public class Game extends GameEngine {
         }
 
         //enemy-spawner
-        enemy.spawnEnemies(enemies, enemyView, levelCount);
+        gameObjectSpawner.spawnEnemies(enemies, enemyView, levelCount);
+
+        //powerUp-spawner
+        gameObjectSpawner.spawnPowerups(powerUps, powerupsView);
+
+        //powerup hitting player
+        for(GameObject powerup: powerUps){
+            if(powerup.isColliding(player)){
+                powerup.setAlive(false);
+                scoreCount += 100;
+            }
+        }
+        powerUps.removeIf(GameObject::isDead);
 
         //objects hitting eachother
         for(GameObject enemy: enemies){
@@ -130,6 +146,7 @@ public class Game extends GameEngine {
                 if(enemy.isColliding(bullet)){
                     bullet.setAlive(false);
                     enemy.setAlive(false);
+                    scoreCount += 10;
                     killCount++;
                 }
             }
@@ -185,12 +202,18 @@ public class Game extends GameEngine {
             enemy.updateAnimation(enemyView, "com/choppyfloppy/resources/Enemy/RedBird/frame-");
         }
 
+        //draws powerups and update animation
+        for(PowerUp powerUp: powerUps){
+            powerUp.draw(getGraphicsContext());
+            powerUp.updateAnimation(powerupsView, "com/choppyfloppy/resources/PowerUp/Powerup-");
+        }
+
         if(playerLife <= 0) {
             graphicsContext.setFill(Color.BLACK);
             graphicsContext.fillRect(0, 0, getWidth(), getHeight());
             graphicsContext.setFill(Color.WHITE);
             graphicsContext.setFont(Font.font("SERIF", 25));
-            graphicsContext.fillText("GAME OVER! Press ESCAPE and restart to try again", getWidth() / 2 - 250, getHeight() / 2);
+            graphicsContext.fillText("GAME OVER! Press ESCAPE and restart to try again\nYour score was: " + scoreCount, getWidth() / 2 - 250, getHeight() / 2);
             getGameLoop().stop();
         }
     }
