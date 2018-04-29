@@ -14,8 +14,14 @@ public class Enemy extends GameObject {
         super(imageView, position, bounds);
     }
 
-
     public void update(Enemy enemy, Player player) {
+
+        if(enemy.isFrozen()){
+            if(player.getPosition().getX() < enemy.getPosition().getX()){
+                flipImage = true;
+            }
+            return;
+        }
 
         //Movement logic
         final double velocity = 1;

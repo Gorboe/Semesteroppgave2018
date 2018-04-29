@@ -12,6 +12,7 @@ public abstract class GameObject {
     private Rectangle bounds;
     private int imageDelay = 0;
     private boolean alive = true;
+    private boolean freeze = false;
 
     public GameObject(ImageView imageView, Vector2D position, Rectangle bounds){
         this.imageView = imageView;
@@ -51,6 +52,8 @@ public abstract class GameObject {
     public void setAlive(boolean alive){
         this.alive = alive;
     }
+    public void setFreeze(boolean freeze){this.freeze = freeze;}
+    public boolean isFrozen(){return freeze;}
 
     public boolean isColliding(GameObject other){
 

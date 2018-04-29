@@ -4,13 +4,32 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
+import java.util.List;
+
 public class PowerUp extends GameObject {
 
-    //powerups only live for max 10seconds before they are removed.
+    //powerups live for 10seconds before they are removed.
     private int lifeTimer = 0;
 
     public PowerUp(ImageView imageView, Vector2D position, Rectangle bounds){
         super(imageView, position, bounds);
+    }
+
+    public void givePowerup(List<Enemy> enemies){
+        int randomizedReward = (int)(4 * Math.random()); //0 - 3 verdier
+        if(randomizedReward == 0){
+            Main.getGame().setPlayerLife(Main.getGame().getPlayerLife() + 1);
+        }else if(randomizedReward == 1){
+            int clearScore = enemies.size() * 10;
+            Main.getGame().setScoreCount(Main.getGame().getScoreCount() + clearScore);
+            enemies.clear();
+        }else if(randomizedReward == 2){
+            for(Enemy enemy: enemies){
+                enemy.setFreeze(true);
+            }
+        }else if(randomizedReward == 3){
+            Main.getGame().setScoreCount(Main.getGame().getScoreCount() + 500);
+        }
     }
 
     public void update() {

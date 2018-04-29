@@ -38,6 +38,13 @@ public class Game extends GameEngine {
 
     public int getScoreCount(){return scoreCount;}
 
+    public void setScoreCount(int scoreCount) {
+        this.scoreCount = scoreCount;
+    }
+
+    public void setPlayerLife(int playerLife){this.playerLife = playerLife;}
+    public int getPlayerLife(){return playerLife;}
+
     public int getLevelCount() {
         return levelCount;
     }
@@ -132,9 +139,10 @@ public class Game extends GameEngine {
         gameObjectSpawner.spawnPowerups(powerUps, powerupsView);
 
         //powerup hitting player
-        for(GameObject powerup: powerUps){
+        for(PowerUp powerup: powerUps){
             powerup.update();
             if(powerup.isColliding(player)){
+                powerup.givePowerup(enemies);
                 powerup.setAlive(false);
                 scoreCount += 100;
             }
@@ -177,7 +185,7 @@ public class Game extends GameEngine {
         //remove this later! checking the size of the bullets and enemies arrays every 2seconds
         checker++;
         if(checker == 120) {
-            System.out.println("The Game board\nBullets: " + bullets.size() + "\nEnemies: " + enemies.size() + "\n");
+            System.out.println("The Game board\nBullets: " + bullets.size() + "\nEnemies: " + enemies.size() + "\nPlayerLife: " + playerLife +"\n");
             checker = 0;
         }
     }

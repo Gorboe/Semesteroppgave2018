@@ -8,5 +8,5 @@
 #titleMenu{
     -fx-background-image: url("../../resources/Menu/main.jpg");
     -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;
+    -fx-background-size: stretch;
 }

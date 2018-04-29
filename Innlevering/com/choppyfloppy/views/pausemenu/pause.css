@@ -7,4 +7,5 @@
 #pausemenu{
     -fx-background-image: url("../img/apache_helicopter.jpg");
     -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
 }
