@@ -6,12 +6,17 @@ import javafx.scene.shape.Rectangle;
 
 public class PowerUp extends GameObject {
 
+    private int lifeTimer = 0;
+
     public PowerUp(ImageView imageView, Vector2D position, Rectangle bounds){
         super(imageView, position, bounds);
     }
 
     public void update() {
-
+        lifeTimer++;
+        if(lifeTimer >= 600){
+            setAlive(false);
+        }
     }
 
     @Override

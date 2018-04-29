@@ -133,14 +133,15 @@ public class Game extends GameEngine {
 
         //powerup hitting player
         for(GameObject powerup: powerUps){
+            powerup.update();
             if(powerup.isColliding(player)){
                 powerup.setAlive(false);
                 scoreCount += 100;
             }
         }
-        powerUps.removeIf(GameObject::isDead);
 
-        //objects hitting eachother
+
+        //bullets hitting enemies, and enemy hitting player
         for(GameObject enemy: enemies){
             for(GameObject bullet: bullets){
                 if(enemy.isColliding(bullet)){
@@ -160,17 +161,19 @@ public class Game extends GameEngine {
         for(Enemy enemy: enemies){
             enemy.update(enemy, player);
         }
-        enemies.removeIf(GameObject::isDead);
 
         //updates movement of every bullet. removes bullets that are out of screenbounds
         for(Bullet bullet: bullets){
             bullet.update();
         }
-        bullets.removeIf(GameObject::isDead);
 
-        //updates player movement
+        //player movement
         player.update(getCanvas().getScene());
 
+        //remove dead object from list
+        bullets.removeIf(GameObject::isDead);
+        powerUps.removeIf(GameObject::isDead);
+        enemies.removeIf(GameObject::isDead);
 
         //remove this later! checking the size of the bullets and enemies arrays every 2seconds
         checker++;
