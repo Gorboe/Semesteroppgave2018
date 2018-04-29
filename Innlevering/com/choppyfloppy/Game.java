@@ -1,17 +1,13 @@
 package com.choppyfloppy;
 
-import com.choppyfloppy.controllers.GameController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +16,7 @@ public class Game extends GameEngine {
     private ImageView enemyView = new ImageView();
     private ImageView bulletView = new ImageView();
     private ImageView powerupsView = new ImageView();
+    private ImageView explotionView = new ImageView();
     private Vector2D playerPosition, mousePosition, aimDirection;
     private int checker = 0;
     private int playerLife = 3;
@@ -32,15 +29,13 @@ public class Game extends GameEngine {
     private List<Enemy> enemies = new ArrayList<>();
     private List<Bullet> bullets = new ArrayList<>();
     private List<PowerUp> powerUps = new ArrayList<>();
+    private List<Explotion> explotions = new ArrayList<>();
     private Image gameLevel;
     private boolean paused;
     private boolean restartCheck = true;
 
     public int getScoreCount(){return scoreCount;}
-
-    public void setScoreCount(int scoreCount) {
-        this.scoreCount = scoreCount;
-    }
+    public void setScoreCount(int scoreCount){this.scoreCount = scoreCount;}
 
     public void setPlayerLife(int playerLife){this.playerLife = playerLife;}
     public int getPlayerLife(){return playerLife;}
@@ -48,7 +43,6 @@ public class Game extends GameEngine {
     public int getLevelCount() {
         return levelCount;
     }
-
     public void setLevelCount(int levelCount) {
         this.levelCount = levelCount;
     }
@@ -156,11 +150,15 @@ public class Game extends GameEngine {
                     enemy.setAlive(false);
                     scoreCount += 10;
                     killCount++;
+                    Explotion explotion = new Explotion(explotionView, new Vector2D(enemy.getPosition().getX(), enemy.getPosition().getY()), new Rectangle(0,0));
+                    explotions.add(explotion);
                 }
             }
             if(enemy.isColliding(player)){
                 enemy.setAlive(false);
                 playerLife--;
+                Explotion explotion = new Explotion(explotionView, new Vector2D(player.getPosition().getX(), player.getPosition().getY()), new Rectangle(0,0));
+                explotions.add(explotion);
             }
         }
 
@@ -174,6 +172,11 @@ public class Game extends GameEngine {
             bullet.update();
         }
 
+        //update every explotion
+        for(Explotion explotion: explotions){
+            explotion.update();
+        }
+
         //updates player movement
         player.update(getCanvas().getScene());
 
@@ -181,6 +184,7 @@ public class Game extends GameEngine {
         bullets.removeIf(GameObject::isDead);
         powerUps.removeIf(GameObject::isDead);
         enemies.removeIf(GameObject::isDead);
+        explotions.removeIf(GameObject::isDead);
 
         //remove this later! checking the size of the bullets and enemies arrays every 2seconds
         checker++;
@@ -218,8 +222,14 @@ public class Game extends GameEngine {
             powerUp.updateAnimation(powerupsView, "com/choppyfloppy/resources/PowerUp/Powerup-");
         }
 
+        //explotions
+        for(Explotion explotion: explotions){
+            explotion.draw(getGraphicsContext());
+            explotion.updateAnimation(explotionView, "com/choppyfloppy/resources/Explosion/explosion-");
+        }
+
         graphicsContext.setFont(Font.font("SERIF", 15));
-        graphicsContext.fillText("Score: " + scoreCount, 10, 20);
+        graphicsContext.fillText("Score: " + scoreCount + "\nLife: " + playerLife, 10, 20);
 
         if(playerLife <= 0) {
             graphicsContext.setFill(Color.BLACK);
