@@ -140,7 +140,6 @@ public class Game extends GameEngine {
             }
         }
 
-
         //bullets hitting enemies, and enemy hitting player
         for(GameObject enemy: enemies){
             for(GameObject bullet: bullets){
@@ -157,17 +156,17 @@ public class Game extends GameEngine {
             }
         }
 
-        //updates movement of every enemy. removes enemies hit by bullets
+        //updates movement of every enemy.
         for(Enemy enemy: enemies){
             enemy.update(enemy, player);
         }
 
-        //updates movement of every bullet. removes bullets that are out of screenbounds
+        //updates movement of every bullet.
         for(Bullet bullet: bullets){
             bullet.update();
         }
 
-        //player movement
+        //updates player movement
         player.update(getCanvas().getScene());
 
         //remove dead object from list
@@ -210,6 +209,9 @@ public class Game extends GameEngine {
             powerUp.draw(getGraphicsContext());
             powerUp.updateAnimation(powerupsView, "com/choppyfloppy/resources/PowerUp/Powerup-");
         }
+
+        graphicsContext.setFont(Font.font("SERIF", 15));
+        graphicsContext.fillText("Score: " + scoreCount, 10, 20);
 
         if(playerLife <= 0) {
             graphicsContext.setFill(Color.BLACK);

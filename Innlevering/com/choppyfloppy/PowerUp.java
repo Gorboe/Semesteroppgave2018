@@ -6,6 +6,7 @@ import javafx.scene.shape.Rectangle;
 
 public class PowerUp extends GameObject {
 
+    //powerups only live for max 10seconds before they are removed.
     private int lifeTimer = 0;
 
     public PowerUp(ImageView imageView, Vector2D position, Rectangle bounds){
