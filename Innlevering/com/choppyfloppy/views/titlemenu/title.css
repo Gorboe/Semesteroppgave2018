@@ -1,5 +1,12 @@
 .menubutton{
     -fx-text-fill: black;
     -fx-border-color: green;
+    -fx-background-repeat: no-repeat;
 
+}
+
+#titleMenu{
+    -fx-background-image: url("../../resources/Menu/main.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
 }
