@@ -1,6 +1,7 @@
 package com.choppyfloppy;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
@@ -9,6 +10,7 @@ import java.util.List;
 public class Enemy extends GameObject {
 
     private boolean flipImage = false;
+    private Image frozenImage = new Image("com/choppyfloppy/resources/Frozen/frozenbird.png");
 
     public Enemy(ImageView imageView, Vector2D position, Rectangle bounds){
         super(imageView, position, bounds);
@@ -42,11 +44,18 @@ public class Enemy extends GameObject {
 
     @Override
     public void draw(GraphicsContext gc) {
+        if(isFrozen()){
+            if(flipImage){
+                gc.drawImage(new Image("com/choppyfloppy/resources/Frozen/frozenbird.png"), getPosition().getX() + getBounds().getWidth(), getPosition().getY(), -getBounds().getWidth(), getBounds().getHeight());
+                return;
+            }
+            gc.drawImage(new Image("com/choppyfloppy/resources/Frozen/frozenbird.png"), getPosition().getX(), getPosition().getY());
+            return;
+        }
         if(flipImage){
             gc.drawImage(getImageView().getImage(), getPosition().getX() + getBounds().getWidth(), getPosition().getY(), -getBounds().getWidth(), getBounds().getHeight());
             flipImage = false;
         }else
-
         gc.drawImage(getImageView().getImage(), getPosition().getX(), getPosition().getY());
     }
 }

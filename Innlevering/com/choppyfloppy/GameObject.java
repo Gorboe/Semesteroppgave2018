@@ -21,6 +21,7 @@ public abstract class GameObject {
     }
 
     public ImageView updateAnimation(ImageView imageView, String imagepath){
+
         if(imageDelay >= 1 && imageDelay <= 5){
             imageView.setImage(new Image(imagepath + "1.png"));
             imageDelay++;
@@ -41,6 +42,7 @@ public abstract class GameObject {
     }
 
     public ImageView getImageView(){return imageView;}
+    public void setImageView(ImageView imageView){this.imageView = imageView;}
     public Rectangle getBounds(){return bounds;}
     public Vector2D getPosition(){return position;}
     public boolean isAlive(){

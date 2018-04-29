@@ -7,8 +7,8 @@ import java.util.List;
 
 public class GameObjectSpawner {
 
-    private final double enemySpawnRate = 0.015;
-    private final double powerupsSpawnRate = 0.011;
+    private final double enemySpawnRate = 0.01;
+    private final double powerupsSpawnRate = 0.005;
 
     public void spawnEnemies(List<Enemy> enemies, ImageView enemyView, int levelCount){
         if(Math.random() < enemySpawnRate){
