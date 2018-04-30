@@ -39,6 +39,7 @@ public class GameLevel {
                 enemy.setAlive(false);
             }
             imageView.setImage(gameLevel);
+            Main.getGame().getSoundManager().playSound("Sound/next-level.wav");
         }else if(levelCount == 3){
             gameLevel = new Image("com/choppyfloppy/Resources/Background/level-3.png");
             for(Enemy enemy: enemies){
@@ -47,6 +48,7 @@ public class GameLevel {
                 enemy.setAlive(false);
             }
             imageView.setImage(gameLevel);
+            Main.getGame().getSoundManager().playSound("Sound/next-level.wav");
         }else if(levelCount == 4){
             gameLevel = new Image("com/choppyfloppy/Resources/Background/level-4.png");
             for(Enemy enemy: enemies){
@@ -55,6 +57,7 @@ public class GameLevel {
                 enemy.setAlive(false);
             }
             imageView.setImage(gameLevel);
+            Main.getGame().getSoundManager().playSound("Sound/next-level.wav");
         }
     }
 

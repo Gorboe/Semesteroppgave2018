@@ -38,6 +38,7 @@ public class Game extends GameEngine {
     public List<Enemy> getEnemies(){return enemies;}
     public List<Explotion> getExplotions(){return explotions; }
     public ImageView getExplotionView(){return explotionView;}
+    public SoundManager getSoundManager(){return soundManager;}
 
     public int getScoreCount(){return scoreCount;}
     public void setScoreCount(int scoreCount){this.scoreCount = scoreCount;}
@@ -85,7 +86,7 @@ public class Game extends GameEngine {
         Bullet bullet = new Bullet(bulletView, new Vector2D(player.getPosition().getX() + player.getBounds().getWidth() - 10, player.getPosition().getY() + player.getBounds().getHeight() - 10), new Rectangle(15,14), new Rectangle(0, 0, getWidth(), getHeight()));
         bullets.add(bullet);
         bullet.setVelocity(new Vector2D(normalizedX, normalizedY));
-        soundManager.playSound("Sound/Laser-shot.wav");
+        soundManager.playSound("Sound/laser-shot.wav");
         //System.out.println("PlayerPosition: (" + (int)playerPosition.getX() + ", " +  (int)playerPosition.getY() + ")\nMousePosition: (" + (int)mousePosition.getX() + ", " + (int)mousePosition.getY() + ")\n");
     }
     private Vector2D subVector(Vector2D vector1, Vector2D vector2){
@@ -125,7 +126,7 @@ public class Game extends GameEngine {
                 powerup.givePowerup(enemies);
                 powerup.setAlive(false);
                 scoreCount += 100;
-                soundManager.playSound("Sound/Bleep-sound.wav");
+                soundManager.playSound("Sound/power-up.wav");
             }
         }
 
@@ -139,7 +140,7 @@ public class Game extends GameEngine {
                     killCount++;
                     Explotion explotion = new Explotion(explotionView, new Vector2D(enemy.getPosition().getX(), enemy.getPosition().getY()), new Rectangle(0,0));
                     explotions.add(explotion);
-                    soundManager.playSound("Sound/Bomb-sound-effect.wav");
+                    soundManager.playSound("Sound/explosion.wav");
                 }
             }
             if(enemy.isColliding(player)){
@@ -147,7 +148,7 @@ public class Game extends GameEngine {
                 playerLife--;
                 Explotion explotion = new Explotion(explotionView, new Vector2D(player.getPosition().getX(), player.getPosition().getY()), new Rectangle(0,0));
                 explotions.add(explotion);
-                soundManager.playSound("Sound/Bomb-sound-effect.wav");
+                soundManager.playSound("Sound/explosion.wav");
             }
         }
 
@@ -214,6 +215,7 @@ public class Game extends GameEngine {
         graphicsContext.fillText("Score: " + scoreCount + "\nLife: " + playerLife, 10, 20);
 
         if(playerLife <= 0) {
+            soundManager.playSound("Sound/game-over.wav");
             graphicsContext.setFill(Color.BLACK);
             graphicsContext.fillRect(0, 0, getWidth(), getHeight());
             graphicsContext.setFill(Color.WHITE);

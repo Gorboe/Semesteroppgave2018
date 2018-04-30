@@ -27,10 +27,12 @@ public class PowerUp extends GameObject {
                 Main.getGame().getExplotions().add(explotion);
                 enemy.setAlive(false);
             }
+            Main.getGame().getSoundManager().playSound("Sound/explosion.wav");
         }else if(randomizedReward == 2){
             for(Enemy enemy: enemies){
                 enemy.setFreeze(true);
             }
+            Main.getGame().getSoundManager().playSound("Sound/freezing.wav");
         }else if(randomizedReward == 3){
             Main.getGame().setScoreCount(Main.getGame().getScoreCount() + 500);
         }
