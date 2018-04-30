@@ -42,12 +42,8 @@ public abstract class GameObject {
     }
 
     public ImageView getImageView(){return imageView;}
-    public void setImageView(ImageView imageView){this.imageView = imageView;}
     public Rectangle getBounds(){return bounds;}
     public Vector2D getPosition(){return position;}
-    public boolean isAlive(){
-        return alive;
-    }
     public boolean isDead(){
         return !alive;
     }
@@ -58,11 +54,6 @@ public abstract class GameObject {
     public boolean isFrozen(){return freeze;}
 
     public boolean isColliding(GameObject other){
-
-        //A = bullet, B = enemy
-        //if(A-left < B-left og Aright < B-left eller A-left > B-right og A-right > B-right) return false
-        //else if(A-top < B-top og A-top < B-top eller A-top > B-bot og A-bot > B-bot) return false
-        //all other conditions equals bounds crossed, return true
 
         if(getPosition().getX() < other.getPosition().getX() && getPosition().getX() + getBounds().getWidth() < other.getPosition().getX()){
             return false;

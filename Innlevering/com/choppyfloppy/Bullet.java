@@ -16,7 +16,6 @@ public class Bullet extends GameObject{
     }
 
     public void setVelocity(Vector2D velocity){this.velocity = velocity;}
-    public Vector2D getVelocity(){return velocity;}
 
     public void update() {
 
