@@ -1,7 +1,6 @@
 package com.choppyfloppy;
 
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -10,6 +9,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Game extends GameEngine {
 
@@ -27,6 +27,7 @@ public class Game extends GameEngine {
     private Player player;
     private GameObjectSpawner gameObjectSpawner = new GameObjectSpawner();
     private GameLevel gameLevel = new GameLevel(gameView);
+    private SoundManager soundManager = new SoundManager();
     private List<Enemy> enemies = new ArrayList<>();
     private List<Bullet> bullets = new ArrayList<>();
     private List<PowerUp> powerUps = new ArrayList<>();
@@ -84,7 +85,7 @@ public class Game extends GameEngine {
         Bullet bullet = new Bullet(bulletView, new Vector2D(player.getPosition().getX() + player.getBounds().getWidth() - 10, player.getPosition().getY() + player.getBounds().getHeight() - 10), new Rectangle(15,14), new Rectangle(0, 0, getWidth(), getHeight()));
         bullets.add(bullet);
         bullet.setVelocity(new Vector2D(normalizedX, normalizedY));
-
+        soundManager.playSound("Sound/Laser-shot.wav");
         //System.out.println("PlayerPosition: (" + (int)playerPosition.getX() + ", " +  (int)playerPosition.getY() + ")\nMousePosition: (" + (int)mousePosition.getX() + ", " + (int)mousePosition.getY() + ")\n");
     }
     private Vector2D subVector(Vector2D vector1, Vector2D vector2){
@@ -124,6 +125,7 @@ public class Game extends GameEngine {
                 powerup.givePowerup(enemies);
                 powerup.setAlive(false);
                 scoreCount += 100;
+                soundManager.playSound("Sound/Bleep-sound.wav");
             }
         }
 
@@ -137,6 +139,7 @@ public class Game extends GameEngine {
                     killCount++;
                     Explotion explotion = new Explotion(explotionView, new Vector2D(enemy.getPosition().getX(), enemy.getPosition().getY()), new Rectangle(0,0));
                     explotions.add(explotion);
+                    soundManager.playSound("Sound/Bomb-sound-effect.wav");
                 }
             }
             if(enemy.isColliding(player)){
@@ -144,6 +147,7 @@ public class Game extends GameEngine {
                 playerLife--;
                 Explotion explotion = new Explotion(explotionView, new Vector2D(player.getPosition().getX(), player.getPosition().getY()), new Rectangle(0,0));
                 explotions.add(explotion);
+                soundManager.playSound("Sound/Bomb-sound-effect.wav");
             }
         }
 

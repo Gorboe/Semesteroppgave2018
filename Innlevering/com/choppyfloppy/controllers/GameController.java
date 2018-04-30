@@ -72,8 +72,10 @@ public class GameController {
 
         try{
             int currentLevel = Main.getGame().getLevelCount();
+            int currentScore = Main.getGame().getScoreCount();
             Main.changeScene("gameview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
             Main.getGame().setLevelCount(currentLevel);
+            Main.getGame().setScoreCount(currentScore);
         }catch(IOException exception){
             System.out.println("feil");
         }
