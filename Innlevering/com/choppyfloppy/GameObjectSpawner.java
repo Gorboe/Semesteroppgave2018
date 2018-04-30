@@ -25,14 +25,14 @@ public class GameObjectSpawner {
 
         if(levelCount >= 3){
             if(Math.random() < enemySpawnRate){
-                Enemy enemy = new Enemy(enemyView, new Vector2D(Math.random() * Main.getGame().getWidth(), 0), new Rectangle(70, 48));
+                Enemy enemy = new Enemy(enemyView, new Vector2D((int)(Math.random() * Main.getGame().getWidth()), 0), new Rectangle(70, 48));
                 enemies.add(enemy);
             }
         }
 
         if(levelCount >= 4){
             if(Math.random() < enemySpawnRate){
-                Enemy enemy = new Enemy(enemyView, new Vector2D(Math.random() * Main.getGame().getWidth(), Main.getGame().getHeight()), new Rectangle(70, 48));
+                Enemy enemy = new Enemy(enemyView, new Vector2D((int)(Math.random() * Main.getGame().getWidth()), Main.getGame().getHeight()), new Rectangle(70, 48));
                 enemies.add(enemy);
             }
         }

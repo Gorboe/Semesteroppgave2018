@@ -17,22 +17,26 @@ public class Game extends GameEngine {
     private ImageView bulletView = new ImageView();
     private ImageView powerupsView = new ImageView();
     private ImageView explotionView = new ImageView();
+    private ImageView gameView = new ImageView();
+    private ImageView playerView = new ImageView();
     private Vector2D playerPosition, mousePosition, aimDirection;
-    private int checker = 0;
     private int playerLife = 3;
     private int killCount = 0;
     private int scoreCount = 0;
     private int levelCount = 1;
     private Player player;
     private GameObjectSpawner gameObjectSpawner = new GameObjectSpawner();
-    private ImageView playerView = new ImageView();
+    private GameLevel gameLevel = new GameLevel(gameView);
     private List<Enemy> enemies = new ArrayList<>();
     private List<Bullet> bullets = new ArrayList<>();
     private List<PowerUp> powerUps = new ArrayList<>();
     private List<Explotion> explotions = new ArrayList<>();
-    private Image gameLevel;
     private boolean paused;
     private boolean restartCheck = true;
+
+    public List<Enemy> getEnemies(){return enemies;}
+    public List<Explotion> getExplotions(){return explotions; }
+    public ImageView getExplotionView(){return explotionView;}
 
     public int getScoreCount(){return scoreCount;}
     public void setScoreCount(int scoreCount){this.scoreCount = scoreCount;}
@@ -46,6 +50,9 @@ public class Game extends GameEngine {
     public void setLevelCount(int levelCount) {
         this.levelCount = levelCount;
     }
+
+    public void setKillCount(int killCount){this.killCount = killCount;}
+    public int getKillCount(){return killCount;}
 
     public Game(GridPane parent, int width, int height){
         super(parent, width, height);
@@ -61,7 +68,7 @@ public class Game extends GameEngine {
     }
 
     private void createContent(){
-        changeLevel();
+        gameLevel.changeLevel(enemies, levelCount);
         createPlayer();
         getCanvas().getScene().setOnMousePressed(this::mousePressedEvent);
     }
@@ -90,27 +97,10 @@ public class Game extends GameEngine {
         player = new Player(playerView, new Vector2D(200,200), new Rectangle(165, 70), new Rectangle(0,0,getWidth(),getHeight()));
     }
 
-    private void changeLevel(){
-        //level-changer
-        if(levelCount == 1) {
-            gameLevel = new Image("com/choppyfloppy/Resources/Background/level-1.png");
-            enemies.clear();
-        }else if(levelCount == 2){
-            gameLevel = new Image("com/choppyfloppy/Resources/Background/level-2.png");
-            enemies.clear();
-        }else if(levelCount == 3){
-            gameLevel = new Image("com/choppyfloppy/Resources/Background/level-3.png");
-            enemies.clear();
-        }else if(levelCount == 4){
-            gameLevel = new Image("com/choppyfloppy/Resources/Background/level-4.png");
-            enemies.clear();
-        }
-    }
-
     protected void OnUpdate(){
 
         if(restartCheck){
-            changeLevel();
+            gameLevel.changeLevel(enemies, levelCount);
             restartCheck = false;
         }
 
@@ -118,13 +108,8 @@ public class Game extends GameEngine {
             return;
         }
 
-        if(levelCount < 4){
-            if(killCount >= 10){
-                levelCount++;
-                changeLevel();
-                killCount = 0;
-            }
-        }
+        //level checker
+        gameLevel.checkForChange(enemies, levelCount);
 
         //enemy-spawner
         gameObjectSpawner.spawnEnemies(enemies, enemyView, levelCount);
@@ -185,20 +170,13 @@ public class Game extends GameEngine {
         powerUps.removeIf(GameObject::isDead);
         enemies.removeIf(GameObject::isDead);
         explotions.removeIf(GameObject::isDead);
-
-        //remove this later! checking the size of the bullets and enemies arrays every 2seconds
-        checker++;
-        if(checker == 120) {
-            System.out.println("The Game board\nBullets: " + bullets.size() + "\nEnemies: " + enemies.size() + "\nPlayerLife: " + playerLife +"\n");
-            checker = 0;
-        }
     }
 
     protected void draw(){
         GraphicsContext graphicsContext = getGraphicsContext();
 
         //draw background
-        graphicsContext.drawImage(gameLevel, 0,0, getWidth(), getHeight());
+        graphicsContext.drawImage(gameView.getImage(), 0,0, getWidth(), getHeight());
 
         //draw player and update the animation
         player.draw(getGraphicsContext());

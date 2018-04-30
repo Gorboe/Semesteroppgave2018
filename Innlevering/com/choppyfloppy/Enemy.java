@@ -5,12 +5,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
-import java.util.List;
-
 public class Enemy extends GameObject {
 
     private boolean flipImage = false;
-    private Image frozenImage = new Image("com/choppyfloppy/resources/Frozen/frozenbird.png");
 
     public Enemy(ImageView imageView, Vector2D position, Rectangle bounds){
         super(imageView, position, bounds);

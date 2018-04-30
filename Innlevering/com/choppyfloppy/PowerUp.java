@@ -22,7 +22,11 @@ public class PowerUp extends GameObject {
         }else if(randomizedReward == 1){
             int clearScore = enemies.size() * 10;
             Main.getGame().setScoreCount(Main.getGame().getScoreCount() + clearScore);
-            enemies.clear();
+            for(Enemy enemy: enemies){
+                Explotion explotion = new Explotion(Main.getGame().getExplotionView(), new Vector2D(enemy.getPosition().getX(), enemy.getPosition().getY()), new Rectangle(0,0));
+                Main.getGame().getExplotions().add(explotion);
+                enemy.setAlive(false);
+            }
         }else if(randomizedReward == 2){
             for(Enemy enemy: enemies){
                 enemy.setFreeze(true);
