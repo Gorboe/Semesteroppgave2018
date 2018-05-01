@@ -1,5 +1,8 @@
-package com.choppyfloppy;
+package com.choppyfloppy.core;
 
+import com.choppyfloppy.Main;
+import com.choppyfloppy.game.Enemy;
+import com.choppyfloppy.game.Explosion;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;

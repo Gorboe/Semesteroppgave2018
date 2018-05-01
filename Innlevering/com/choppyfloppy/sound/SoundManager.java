@@ -1,4 +1,4 @@
-package com.choppyfloppy;
+package com.choppyfloppy.sound;
 
 import sun.audio.*;
 import java.io.*;

@@ -1,5 +1,7 @@
-package com.choppyfloppy;
+package com.choppyfloppy.game;
 
+import com.choppyfloppy.core.GameObject;
+import com.choppyfloppy.core.Vector2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

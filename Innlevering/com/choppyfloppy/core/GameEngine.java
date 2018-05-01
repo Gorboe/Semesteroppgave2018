@@ -1,4 +1,4 @@
-package com.choppyfloppy;
+package com.choppyfloppy.core;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;

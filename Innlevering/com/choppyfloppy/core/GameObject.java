@@ -1,4 +1,4 @@
-package com.choppyfloppy;
+package com.choppyfloppy.core;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

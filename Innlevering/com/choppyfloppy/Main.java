@@ -1,6 +1,7 @@
 package com.choppyfloppy;
 
 import com.choppyfloppy.controllers.GameController;
+import com.choppyfloppy.core.Game;
 import com.choppyfloppy.saveload.Createsavefile;
 import com.choppyfloppy.saveload.Createsavefolder;
 import javafx.application.Application;

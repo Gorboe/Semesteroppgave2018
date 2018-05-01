@@ -1,6 +1,8 @@
-package com.choppyfloppy;
+package com.choppyfloppy.core;
 
 import com.choppyfloppy.controllers.EndController;
+import com.choppyfloppy.game.*;
+import com.choppyfloppy.sound.SoundManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;

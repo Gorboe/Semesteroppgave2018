@@ -1,4 +1,4 @@
-package com.choppyfloppy;
+package com.choppyfloppy.core;
 
 public class Vector2D {
     private double x;

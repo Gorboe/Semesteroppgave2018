@@ -1,14 +1,13 @@
-package com.choppyfloppy;
+package com.choppyfloppy.game;
 
+import com.choppyfloppy.core.GameObject;
+import com.choppyfloppy.core.Vector2D;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.shape.Rectangle;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Player extends GameObject {
