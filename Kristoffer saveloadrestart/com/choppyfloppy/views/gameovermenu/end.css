@@ -3,8 +3,8 @@
     -fx-border-color: green;
 }
 
-#pausemenu{
-    -fx-background-image: url("../img/apache_helicopter.jpg");
+#endMenu{
+    -fx-background-image: url("../img/gameover.jpg");
     -fx-background-repeat: no-repeat;
     -fx-background-size: stretch;
 }

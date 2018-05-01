@@ -22,27 +22,21 @@ public class Vector2D {
     public void addX(double x) {
         this.x += x;
     }
-
     public void addY(double y) {
         this.y += y;
     }
-
     public double getX() {
         return x;
     }
-
     public void setX(double x) {
         this.x = x;
     }
-
     public double getY() {
         return y;
     }
-
     public void setY(double y) {
         this.y = y;
     }
-
     public static Vector2D Zero() {
         return new Vector2D(0,0);
     }

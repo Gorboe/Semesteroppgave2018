@@ -1,39 +1,51 @@
 package com.choppyfloppy;
 
+import com.choppyfloppy.controllers.GameController;
+import com.choppyfloppy.saveload.Createsavefile;
+import com.choppyfloppy.saveload.Createsavefolder;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import java.io.*;
 
 public class Main extends Application {
-
-    private static Stage primaryStage;
-
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-        Main.primaryStage = primaryStage;
-        changeScene("titleview.fxml", 500, 500);
-    }
 
     public static void main(String[] args) {
         launch(args);
     }
 
+    private static Stage primaryStage;
+    private static Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+    public static final int SCREEN_WIDTH = (int)primaryScreenBounds.getMaxX();
+    public static final int SCREEN_HEIGHT = (int)primaryScreenBounds.getMaxY();
+
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Main.primaryStage = primaryStage;
+        Createsavefolder.createDirectoryIfNotExists();
+        Createsavefile.createfile();
+        changeScene("titleview.fxml", SCREEN_WIDTH, SCREEN_HEIGHT);
+    }
+
+    private static Game game;
+    public static Game getGame() {
+        return game;
+    }
+
     public static void changeScene(String name, int width, int height)throws IOException{
-        //Parent root = FXMLLoader.load(Main.class.getResource("/com/choppyfloppy/views/" + name));
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/com/choppyfloppy/views/" + name));
 
         GridPane root = loader.load();
         Scene scene = new Scene(root, width, height);
 
         if(name.equals("gameview.fxml")){
-            Game game = new Game(root, width, height);
+            game = new Game(root, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+            GameController gameController = loader.getController();
+            gameController.init(scene);
         }
 
         primaryStage.setTitle("ChoppyFloppy");

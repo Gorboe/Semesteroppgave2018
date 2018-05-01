@@ -1,9 +1,12 @@
 .menubutton{
-     -fx-text-fill: black;
-     -fx-border-color: green;
+    -fx-text-fill: black;
+    -fx-border-color: green;
+    -fx-background-repeat: no-repeat;
 
- }
+}
 
-#startmenu{
-    -fx-background-color: red;
+#titleMenu{
+    -fx-background-image: url("../../resources/Menu/main.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
 }

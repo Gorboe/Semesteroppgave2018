@@ -11,6 +11,8 @@ public abstract class GameObject {
     private ImageView imageView;
     private Rectangle bounds;
     private int imageDelay = 0;
+    private boolean alive = true;
+    private boolean freeze = false;
 
     public GameObject(ImageView imageView, Vector2D position, Rectangle bounds){
         this.imageView = imageView;
@@ -19,6 +21,7 @@ public abstract class GameObject {
     }
 
     public ImageView updateAnimation(ImageView imageView, String imagepath){
+
         if(imageDelay >= 1 && imageDelay <= 5){
             imageView.setImage(new Image(imagepath + "1.png"));
             imageDelay++;
@@ -41,8 +44,29 @@ public abstract class GameObject {
     public ImageView getImageView(){return imageView;}
     public Rectangle getBounds(){return bounds;}
     public Vector2D getPosition(){return position;}
+    public boolean isDead(){
+        return !alive;
+    }
+    public void setAlive(boolean alive){
+        this.alive = alive;
+    }
+    public void setFreeze(boolean freeze){this.freeze = freeze;}
+    public boolean isFrozen(){return freeze;}
 
-    //we need a flip-image method.
+    public boolean isColliding(GameObject other){
+
+        if(getPosition().getX() < other.getPosition().getX() && getPosition().getX() + getBounds().getWidth() < other.getPosition().getX()){
+            return false;
+        }else if(getPosition().getX() > other.getPosition().getX() + other.getBounds().getWidth() && getPosition().getX() + getBounds().getWidth() > other.getPosition().getX() + other.getBounds().getWidth()){
+            return false;
+        }else if(getPosition().getY() < other.getPosition().getY() && getPosition().getY() + getBounds().getHeight() < other.getPosition().getY()){
+            return false;
+        }else if(getPosition().getY() > other.getPosition().getY() + other.getBounds().getHeight() && getPosition().getY() + getBounds().getHeight() > other.getPosition().getY() + other.getBounds().getHeight()){
+            return false;
+        }else
+
+        return true;
+    }
 
     public void update(){}
 

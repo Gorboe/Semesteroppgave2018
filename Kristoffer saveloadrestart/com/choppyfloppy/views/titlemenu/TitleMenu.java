@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class TitleMenu extends VBox {
 
-    private Runnable onStartClicked;
+    private Runnable onNewGameClicked;
     private Runnable onContinueClicked;
     private Runnable onExitClicked;
 
@@ -27,16 +27,16 @@ public class TitleMenu extends VBox {
 
     }
 
-    public void setOnStartClicked(Runnable onStartClicked) {
-        this.onStartClicked = onStartClicked;
+    public void setOnNewGameClicked(Runnable onStartClicked) {
+        this.onNewGameClicked = onStartClicked;
     }
     public void setOnContinueClicked(Runnable onContinueClicked){this.onContinueClicked = onContinueClicked;}
     public void setOnExitClicked(Runnable onExitClicked){this.onExitClicked = onExitClicked;}
 
     @FXML
-    protected void startClicked(){
-        if (onStartClicked != null){
-            onStartClicked.run();
+    protected void newGameClicked(){
+        if (onNewGameClicked != null){
+            onNewGameClicked.run();
         }
     }
 

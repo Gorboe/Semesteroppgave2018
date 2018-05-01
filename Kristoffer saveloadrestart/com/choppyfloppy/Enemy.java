@@ -1,6 +1,7 @@
 package com.choppyfloppy;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
@@ -13,6 +14,15 @@ public class Enemy extends GameObject {
     }
 
     public void update(Enemy enemy, Player player) {
+
+        if(enemy.isFrozen()){
+            if(player.getPosition().getX() < enemy.getPosition().getX()){
+                flipImage = true;
+            }
+            return;
+        }
+
+        //Movement logic
         final double velocity = 1;
 
         if(player.getPosition().getX() > enemy.getPosition().getX()){
@@ -31,11 +41,18 @@ public class Enemy extends GameObject {
 
     @Override
     public void draw(GraphicsContext gc) {
+        if(isFrozen()){
+            if(flipImage){
+                gc.drawImage(new Image("com/choppyfloppy/resources/Frozen/frozenbird.png"), getPosition().getX() + getBounds().getWidth(), getPosition().getY(), -getBounds().getWidth(), getBounds().getHeight());
+                return;
+            }
+            gc.drawImage(new Image("com/choppyfloppy/resources/Frozen/frozenbird.png"), getPosition().getX(), getPosition().getY());
+            return;
+        }
         if(flipImage){
             gc.drawImage(getImageView().getImage(), getPosition().getX() + getBounds().getWidth(), getPosition().getY(), -getBounds().getWidth(), getBounds().getHeight());
             flipImage = false;
         }else
-
         gc.drawImage(getImageView().getImage(), getPosition().getX(), getPosition().getY());
     }
 }

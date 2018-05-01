@@ -1,60 +1,53 @@
 package com.choppyfloppy.controllers;
 
 import com.choppyfloppy.Main;
-import com.choppyfloppy.views.pausemenu.GameMenu;
+import com.choppyfloppy.saveload.ResourceManager;
+import com.choppyfloppy.saveload.SaveData;
 import com.choppyfloppy.views.titlemenu.TitleMenu;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 
-import java.beans.Visibility;
 import java.io.IOException;
 
 public class TitleController {
 
     @FXML private TitleMenu titleMenu;
-    @FXML private GameMenu gameMenu;
 
     @FXML public void initialize(){
-        titleMenu.setOnStartClicked(this::startOnClick);
+        titleMenu.setOnNewGameClicked(this::newGameOnClick);
         titleMenu.setOnContinueClicked(this::continueOnClick);
         titleMenu.setOnExitClicked(this::exitOnClick);
-        gameMenu.setOnResumeClicked(this::resumeOnClick);
-        gameMenu.setOnRestartClicked(this::restartOnClick);
-        gameMenu.setOnQuitToMainClicked(this::quitToMainOnClick);
     }
 
-    private void startOnClick(){
+    private void newGameOnClick(){
+
         try{
-            Main.changeScene("gameview.fxml", 800, 800);
+            Main.changeScene("gameview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
         }catch(IOException exception){
             System.out.println("feil");
         }
     }
 
     private void continueOnClick(){
-        System.out.println("Continnue funker");
+        try {
+            System.out.println("Jeg virker load");
+            SaveData load = (SaveData) ResourceManager.loadGame("saveFolder/save.txt");
+            Main.changeScene("gameview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+            Main.getGame().setScoreCount(load.score);
+            Main.getGame().setLevelCount(load.currentLevel);
+
+
+        } catch (Exception ev) {
+            System.out.println("Could not load save data: " + ev.getMessage());
+        }
+        //loadgame.readFile();
     }
 
     private void exitOnClick(){
         Platform.exit();
     }
 
-    private void resumeOnClick(){
-        //set visibility of menu = 0.
-        //start gameloop.
-    }
 
-    private void restartOnClick(){
-        //set killscore = 0, set position = x= 10, y = 10, update score, load current level.
-    }
-
-    private void quitToMainOnClick(){
-        /*try{
-            Main.changeScene("titleview.fxml", 800, 800);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-    }
 
 
 }

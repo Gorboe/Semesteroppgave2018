@@ -11,10 +11,12 @@ public class GameMenu extends VBox {
         private Runnable onResumeClicked;
         private Runnable onRestartClicked;
         private Runnable onQuitToMainClicked;
+        private Runnable onExitClicked;
+        private Runnable onSaveClicked;
 
         public GameMenu() {
 
-            FXMLLoader fxmlLoader = new FXMLLoader(GameMenu.class.getResource("GameMenu.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(GameMenu.class.getResource("stopMenu.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.setClassLoader(getClass().getClassLoader());
@@ -35,9 +37,15 @@ public class GameMenu extends VBox {
             this.onRestartClicked = onRestartClicked;
         }
 
-        public void setOnQuitToMainClicked(Runnable onExitClicked) {
-            this.onQuitToMainClicked = onExitClicked;
-        }
+        public void setOnSaveClicked(Runnable onSaveClicked) {
+        this.onSaveClicked = onSaveClicked;
+    }
+
+        public void setOnQuitToMainClicked(Runnable onQuitToMainMenuClicked) { this.onQuitToMainClicked = onQuitToMainMenuClicked; }
+
+        public void setOnExitClicked(Runnable onExitClicked){
+        this.onExitClicked = onExitClicked;
+    }
 
         @FXML
         protected void resumeClicked() {
@@ -52,12 +60,25 @@ public class GameMenu extends VBox {
                 onRestartClicked.run();
             }
         }
+        @FXML
+        protected void saveClicked() {
+            if (onSaveClicked != null) {
+                onSaveClicked.run();
+            }
+        }
+
 
         @FXML
-        protected void exitClicked() {
+        protected void quitToMainMenuClicked() {
             if (onQuitToMainClicked != null) {
                 onQuitToMainClicked.run();
             }
         }
 
-    }
+        @FXML
+        protected void exitClicked(){
+            if(onExitClicked != null){
+                onExitClicked.run();
+            }
+        }
+}
