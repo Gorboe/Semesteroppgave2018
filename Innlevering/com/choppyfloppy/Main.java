@@ -2,8 +2,8 @@ package com.choppyfloppy;
 
 import com.choppyfloppy.controllers.GameController;
 import com.choppyfloppy.core.Game;
+import com.choppyfloppy.saveload.CreateSaveFolder;
 import com.choppyfloppy.saveload.Createsavefile;
-import com.choppyfloppy.saveload.Createsavefolder;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -27,7 +27,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Main.primaryStage = primaryStage;
-        Createsavefolder.createDirectoryIfNotExists();
+        CreateSaveFolder.createDirectoryIfNotExists();
         Createsavefile.createfile();
         changeScene("titleview.fxml", SCREEN_WIDTH, SCREEN_HEIGHT);
     }
