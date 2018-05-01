@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class createsavefolder {
+public class Createsavefolder {
 
     public static void createDirectoryIfNotExists() {
         System.out.println("Jeg virker(mappe)");

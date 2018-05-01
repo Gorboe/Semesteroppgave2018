@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.stage.Screen?>
 <fx:root xmlns="http://javafx.com/javafx" fx:id="pausemenu" xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@pause.css" alignment="CENTER">
 
     <Label styleClass="pauseMenu" text="PAUSE"/>

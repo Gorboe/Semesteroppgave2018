@@ -1,5 +1,6 @@
 package com.choppyfloppy;
 
+import com.choppyfloppy.controllers.EndController;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -216,6 +217,7 @@ public class Game extends GameEngine {
 
         if(playerLife <= 0) {
             soundManager.playSound("Sound/game-over.wav");
+            EndController.endGame();
             graphicsContext.setFill(Color.BLACK);
             graphicsContext.fillRect(0, 0, getWidth(), getHeight());
             graphicsContext.setFill(Color.WHITE);

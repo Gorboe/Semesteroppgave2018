@@ -1,0 +1,10 @@
+.menubutton{
+    -fx-text-fill: black;
+    -fx-border-color: green;
+}
+
+#endMenu{
+    -fx-background-image: url("../img/gameover.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
+}

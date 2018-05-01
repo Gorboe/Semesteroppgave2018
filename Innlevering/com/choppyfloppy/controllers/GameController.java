@@ -1,9 +1,9 @@
 package com.choppyfloppy.controllers;
 
-import com.choppyfloppy.Game;
 import com.choppyfloppy.Main;
-import com.choppyfloppy.saveload.createsavefile;
-import com.choppyfloppy.saveload.createsavefolder;
+import com.choppyfloppy.saveload.Createsavefile;
+import com.choppyfloppy.saveload.ResourceManager;
+import com.choppyfloppy.saveload.SaveData;
 import com.choppyfloppy.views.pausemenu.GameMenu;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -60,6 +60,8 @@ public class GameController {
 
     }
 
+
+
     private void resumeOnClick(){
         boolean paused = !Main.getGame().isPaused();
         Main.getGame().setPaused(paused);
@@ -72,10 +74,8 @@ public class GameController {
 
         try{
             int currentLevel = Main.getGame().getLevelCount();
-            int currentScore = Main.getGame().getScoreCount();
             Main.changeScene("gameview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
             Main.getGame().setLevelCount(currentLevel);
-            Main.getGame().setScoreCount(currentScore);
         }catch(IOException exception){
             System.out.println("feil");
         }
@@ -85,7 +85,17 @@ public class GameController {
 
     private void saveOnClick(){
         System.out.println("jegvirkersave");
-        createsavefile.saveFile();
+        Createsavefile.createfile();
+        SaveData data = new SaveData();
+        data.currentLevel = Main.getGame().getLevelCount();
+        data.score = Main.getGame().getScoreCount();
+        try {
+            ResourceManager.saveGame(data, "saveFolder/save.txt");
+        } catch (Exception ev) {
+            System.out.println("Could not save: " + ev.getMessage());
+        }
+
+
     }
 
     private void quitToMainOnClick(){

@@ -1,8 +1,8 @@
 package com.choppyfloppy.controllers;
 
 import com.choppyfloppy.Main;
-import com.choppyfloppy.saveload.createsavefolder;
-import com.choppyfloppy.saveload.loadgame;
+import com.choppyfloppy.saveload.ResourceManager;
+import com.choppyfloppy.saveload.SaveData;
 import com.choppyfloppy.views.titlemenu.TitleMenu;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -29,7 +29,18 @@ public class TitleController {
     }
 
     private void continueOnClick(){
-        loadgame.readFile();
+        try {
+            System.out.println("Jeg virker load");
+            SaveData load = (SaveData) ResourceManager.loadGame("saveFolder/save.txt");
+            Main.changeScene("gameview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+            Main.getGame().setScoreCount(load.score);
+            Main.getGame().setLevelCount(load.currentLevel);
+
+
+        } catch (Exception ev) {
+            System.out.println("Could not load save data: " + ev.getMessage());
+        }
+        //loadgame.readFile();
     }
 
     private void exitOnClick(){
