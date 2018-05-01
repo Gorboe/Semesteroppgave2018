@@ -32,13 +32,13 @@ public class Game extends GameEngine {
     private List<Enemy> enemies = new ArrayList<>();
     private List<Bullet> bullets = new ArrayList<>();
     private List<PowerUp> powerUps = new ArrayList<>();
-    private List<Explotion> explotions = new ArrayList<>();
+    private List<Explosion> explosions = new ArrayList<>();
     private boolean paused;
     private boolean restartCheck = true;
 
     public List<Enemy> getEnemies(){return enemies;}
-    public List<Explotion> getExplotions(){return explotions; }
-    public ImageView getExplotionView(){return explotionView;}
+    public List<Explosion> getExplosions(){return explosions; }
+    public ImageView getExplosionView(){return explotionView;}
     public SoundManager getSoundManager(){return soundManager;}
 
     public int getScoreCount(){return scoreCount;}
@@ -139,16 +139,16 @@ public class Game extends GameEngine {
                     enemy.setAlive(false);
                     scoreCount += 10;
                     killCount++;
-                    Explotion explotion = new Explotion(explotionView, new Vector2D(enemy.getPosition().getX(), enemy.getPosition().getY()), new Rectangle(0,0));
-                    explotions.add(explotion);
+                    Explosion explosion = new Explosion(explotionView, new Vector2D(enemy.getPosition().getX(), enemy.getPosition().getY()), new Rectangle(0,0));
+                    explosions.add(explosion);
                     soundManager.playSound("Sound/explosion.wav");
                 }
             }
             if(enemy.isColliding(player)){
                 enemy.setAlive(false);
                 playerLife--;
-                Explotion explotion = new Explotion(explotionView, new Vector2D(player.getPosition().getX(), player.getPosition().getY()), new Rectangle(0,0));
-                explotions.add(explotion);
+                Explosion explosion = new Explosion(explotionView, new Vector2D(player.getPosition().getX(), player.getPosition().getY()), new Rectangle(0,0));
+                explosions.add(explosion);
                 soundManager.playSound("Sound/explosion.wav");
             }
         }
@@ -164,8 +164,8 @@ public class Game extends GameEngine {
         }
 
         //update every explotion
-        for(Explotion explotion: explotions){
-            explotion.update();
+        for(Explosion explosion : explosions){
+            explosion.update();
         }
 
         //updates player movement
@@ -175,7 +175,7 @@ public class Game extends GameEngine {
         bullets.removeIf(GameObject::isDead);
         powerUps.removeIf(GameObject::isDead);
         enemies.removeIf(GameObject::isDead);
-        explotions.removeIf(GameObject::isDead);
+        explosions.removeIf(GameObject::isDead);
     }
 
     protected void draw(){
@@ -206,10 +206,10 @@ public class Game extends GameEngine {
             powerUp.updateAnimation(powerupsView, "com/choppyfloppy/resources/PowerUp/Powerup-");
         }
 
-        //explotions
-        for(Explotion explotion: explotions){
-            explotion.draw(getGraphicsContext());
-            explotion.updateAnimation(explotionView, "com/choppyfloppy/resources/Explosion/explosion-");
+        //explosions
+        for(Explosion explosion : explosions){
+            explosion.draw(getGraphicsContext());
+            explosion.updateAnimation(explotionView, "com/choppyfloppy/resources/Explosion/explosion-");
         }
 
         graphicsContext.setFont(Font.font("SERIF", 15));

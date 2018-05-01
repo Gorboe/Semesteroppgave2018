@@ -34,8 +34,8 @@ public class GameLevel {
         }else if(levelCount == 2){
             gameLevel = new Image("com/choppyfloppy/Resources/Background/level-2.png");
             for(Enemy enemy: enemies){
-                Explotion explotion = new Explotion(Main.getGame().getExplotionView(), new Vector2D(enemy.getPosition().getX(), enemy.getPosition().getY()), new Rectangle(0,0));
-                Main.getGame().getExplotions().add(explotion);
+                Explosion explosion = new Explosion(Main.getGame().getExplosionView(), new Vector2D(enemy.getPosition().getX(), enemy.getPosition().getY()), new Rectangle(0,0));
+                Main.getGame().getExplosions().add(explosion);
                 enemy.setAlive(false);
             }
             imageView.setImage(gameLevel);
@@ -43,8 +43,8 @@ public class GameLevel {
         }else if(levelCount == 3){
             gameLevel = new Image("com/choppyfloppy/Resources/Background/level-3.png");
             for(Enemy enemy: enemies){
-                Explotion explotion = new Explotion(Main.getGame().getExplotionView(), new Vector2D(enemy.getPosition().getX(), enemy.getPosition().getY()), new Rectangle(0,0));
-                Main.getGame().getExplotions().add(explotion);
+                Explosion explosion = new Explosion(Main.getGame().getExplosionView(), new Vector2D(enemy.getPosition().getX(), enemy.getPosition().getY()), new Rectangle(0,0));
+                Main.getGame().getExplosions().add(explosion);
                 enemy.setAlive(false);
             }
             imageView.setImage(gameLevel);
@@ -52,8 +52,8 @@ public class GameLevel {
         }else if(levelCount == 4){
             gameLevel = new Image("com/choppyfloppy/Resources/Background/level-4.png");
             for(Enemy enemy: enemies){
-                Explotion explotion = new Explotion(Main.getGame().getExplotionView(), new Vector2D(enemy.getPosition().getX(), enemy.getPosition().getY()), new Rectangle(0,0));
-                Main.getGame().getExplotions().add(explotion);
+                Explosion explosion = new Explosion(Main.getGame().getExplosionView(), new Vector2D(enemy.getPosition().getX(), enemy.getPosition().getY()), new Rectangle(0,0));
+                Main.getGame().getExplosions().add(explosion);
                 enemy.setAlive(false);
             }
             imageView.setImage(gameLevel);

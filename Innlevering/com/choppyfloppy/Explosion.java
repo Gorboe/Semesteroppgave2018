@@ -4,11 +4,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
-public class Explotion extends GameObject {
+public class Explosion extends GameObject {
 
     private int lifeTimer = 0;
 
-    public Explotion(ImageView imageView, Vector2D position, Rectangle bounds){
+    public Explosion(ImageView imageView, Vector2D position, Rectangle bounds){
         super(imageView, position, bounds);
     }
 
