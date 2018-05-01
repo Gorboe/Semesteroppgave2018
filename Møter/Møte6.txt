@@ -1,0 +1,4 @@
+-Javadoc
+-Kjørbar jar-fil
+-Grupperapport
+-Individuell rapport
