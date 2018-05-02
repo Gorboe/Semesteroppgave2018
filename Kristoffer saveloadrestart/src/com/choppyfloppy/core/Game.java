@@ -15,14 +15,12 @@ import java.util.List;
 /**
  * Game is where all the GameContent is made.
  * MouseEvent - Shooting logic is here.
- *
- * OnUpdate - updates the movement of all the
+ * updates the movement of all the
  * GameObjects like player, bullets, enemies
  * and powerups. Enemies and powerups are
  * spawned here. Checking for bounds collision
  * and removing "dead" GameObjects.
- *
- * draw - draws all the GameObjects to the
+ * draws all the GameObjects to the
  * canvas, and updates all of the game -
  * animations. Also displays the scoreCount
  * and playerLife in the top left corner.
@@ -48,6 +46,17 @@ public class Game extends GameEngine {
     private final List<Explosion> explosions = new ArrayList<>();
     private boolean paused;
     private boolean restartCheck = true;
+
+    /**
+     * Constructor of the Game class
+     * @param parent is used to get the size of the window
+     * @param width is used to set the width of the Canvas
+     * @param height is used to set the height of the Canvas
+     */
+    public Game(GridPane parent, int width, int height){
+        super(parent, width, height);
+        createContent();
+    }
 
     /**
      * Is used to access the explosions list
@@ -101,23 +110,12 @@ public class Game extends GameEngine {
     /**
      * Is used to set the killCount integer.
      */
-    public void setKillCount(int killCount){this.killCount = killCount;}
+    public void setKillCount(){this.killCount = 0;}
 
     /**
      * Is used to access the killCount integer.
      */
     public int getKillCount(){return killCount;}
-
-    /**
-     * Constructor of the Game class
-     * @param parent is used to get the size of the window
-     * @param width is used to set the width of the Canvas
-     * @param height is used to set the height of the Canvas
-     */
-    public Game(GridPane parent, int width, int height){
-        super(parent, width, height);
-        createContent();
-    }
 
     /**
      * Used to set the value of paused in Game
@@ -209,7 +207,7 @@ public class Game extends GameEngine {
         }
 
         //updates movement of every enemy.
-        enemies.parallelStream().forEach((enemy) -> {enemy.update(player);});
+        enemies.parallelStream().forEach((enemy) -> enemy.update(player));
 
         //updates movement of every bullet.
         bullets.parallelStream().forEach(Bullet::update);

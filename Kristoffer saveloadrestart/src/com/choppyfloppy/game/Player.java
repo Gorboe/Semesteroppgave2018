@@ -18,7 +18,6 @@ import java.util.Objects;
 public class Player extends GameObject {
 
     private Rectangle screenBounds;
-    private double velocity = 5;
     private boolean rightActive, leftActive, upActive, downActive = false;
 
     /**
@@ -67,6 +66,7 @@ public class Player extends GameObject {
      * @param scene is used so we can have keyInputs for movement
      */
     public void update(Scene scene){
+        final double velocity = 5;
         Objects.requireNonNull(scene);
 
         scene.setOnKeyPressed(this::keyPressedEvent);

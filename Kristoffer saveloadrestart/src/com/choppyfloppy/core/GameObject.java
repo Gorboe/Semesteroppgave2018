@@ -54,7 +54,7 @@ public abstract class GameObject {
      * simple GameAnimations.
      * @param imagepath stores the string value of the image location
      */
-    public ImageView updateAnimation(ImageView imageView, String imagepath){
+     public void updateAnimation(ImageView imageView, String imagepath){
         if(imageDelay >= 1 && imageDelay <= 5){
             imageView.setImage(getImage(imagepath + "1.png"));
             imageDelay++;
@@ -70,13 +70,12 @@ public abstract class GameObject {
         }else{
             imageDelay = 1;
         }
-        return imageView;
-    }
+     }
 
     /**
      * Used to access the ImageView of the object.
      */
-    public ImageView getImageView(){
+    protected ImageView getImageView(){
         return imageView;
     }
 
@@ -84,7 +83,7 @@ public abstract class GameObject {
      * Used to access the object bounds. This is important for the
      * isColliding method.
      */
-    public Rectangle getBounds(){
+    protected Rectangle getBounds(){
         return bounds;
     }
 
@@ -126,7 +125,7 @@ public abstract class GameObject {
      * Used to access the freeze boolean value. We can use this
      * to check if a GameObject is frozen or not.
      */
-    public boolean isFrozen(){
+    protected boolean isFrozen(){
         return freeze;
     }
 

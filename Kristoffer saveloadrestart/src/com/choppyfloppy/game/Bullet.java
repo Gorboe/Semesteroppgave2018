@@ -16,7 +16,6 @@ public class Bullet extends GameObject {
 
     private Vector2D velocity;
     private Rectangle screenBounds;
-    private final int bulletSpeed = 10;
 
     /**
      * Bullet method is used to give the Bullet an image, position and boundaries.
@@ -51,9 +50,8 @@ public class Bullet extends GameObject {
      * boundaries of the canvas, update method will remove
      * the object.
      */
-
-    //Alert påcontinue hvis fil ikke erder.
     public void update() {
+        final int bulletSpeed = 10;
 
         //bullet movement
         getPosition().setX(getPosition().getX() + velocity.getX() * bulletSpeed);

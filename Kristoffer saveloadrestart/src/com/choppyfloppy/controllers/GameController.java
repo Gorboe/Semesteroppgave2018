@@ -22,7 +22,6 @@ public class GameController {
 
     @FXML private GameMenu gameMenu;
     @FXML private GridPane root;
-    private Scene scene;
 
     /**
      * Creates a KeyEvent that pauses the "game" and brings up
@@ -32,8 +31,8 @@ public class GameController {
      * @param scene is used to grab input
      */
     public void init(Scene scene){
-        this.scene = Objects.requireNonNull(scene);
-        scene.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+        Scene scene1 = Objects.requireNonNull(scene);
+        scene1.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ESCAPE){
                 boolean paused = !Main.getGame().isPaused();
                 Main.getGame().setPaused(paused);

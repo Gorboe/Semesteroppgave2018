@@ -34,7 +34,7 @@ public class GameLevel {
                 levelCount ++;
                 Main.getGame().setLevelCount(levelCount);
                 changeLevel(enemies, levelCount);
-                Main.getGame().setKillCount(0);
+                Main.getGame().setKillCount();
             }
         }
     }
