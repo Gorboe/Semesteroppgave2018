@@ -1,0 +1,10 @@
+.menubutton{
+    -fx-text-fill: black;
+    -fx-border-color: green;
+}
+
+#endMenu{
+    -fx-background-image: url("/com/choppyfloppy/resources/Menu/gameOver.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
+}

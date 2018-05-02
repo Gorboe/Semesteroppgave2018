@@ -1,0 +1,10 @@
+.menubutton{
+    -fx-text-fill: black;
+    -fx-border-color: green;
+}
+
+#pausemenu{
+    -fx-background-image: url("/com/choppyfloppy/resources/Menu/pause.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
+}

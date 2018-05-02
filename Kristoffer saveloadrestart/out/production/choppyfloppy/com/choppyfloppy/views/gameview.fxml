@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.layout.*?>
+<?import com.choppyfloppy.views.pausemenu.GameMenu?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.stage.Screen?>
+<GridPane fx:id="root" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.choppyfloppy.controllers.GameController">
+        <Canvas fx:id="canvas"></Canvas>
+        <GameMenu fx:id="gameMenu"></GameMenu>
+</GridPane>
