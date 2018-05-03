@@ -1,7 +1,8 @@
 .menubutton{
-    -fx-text-fill: black;
-    -fx-border-color: green;
-    -fx-background-repeat: no-repeat;
+    -fx-text-fill: white;
+    -fx-border-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-insets: 0;
+    -fx-background-radius: 30;
 
 }
 

@@ -10,7 +10,7 @@
     </fx:define>
 
     <Button fx:id="newGameButton" styleClass="menubutton" mnemonicParsing="false" text="New Game" onAction="#newGameClicked" />
-    <Button fx:id="mainMenuButton" styleClass="menubutton" mnemonicParsing="false" text="Main menu" onAction="#mainMenuClicked"/>
-    <Button fx:id="exitButton" styleClass="menubutton" mnemonicParsing="false" text="Exit" onAction="#exitClicked"/>
+    <Button fx:id="mainMenuButton" styleClass="menubutton" mnemonicParsing="false" text="Main Menu" onAction="#mainMenuClicked"/>
+    <Button fx:id="exitButton" styleClass="menubutton" mnemonicParsing="false" text="Exit Game" onAction="#exitClicked"/>
 
 </fx:root>
