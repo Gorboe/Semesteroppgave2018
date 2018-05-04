@@ -22,12 +22,7 @@ public class Main extends Application {
     private static Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     public static final int SCREEN_WIDTH = (int)primaryScreenBounds.getMaxX();
     public static final int SCREEN_HEIGHT = (int)primaryScreenBounds.getMaxY();
-
-
     private static Game game;
-    public static Game getGame() {
-        return game;
-    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -36,6 +31,10 @@ public class Main extends Application {
         changeScene("titleview.fxml", SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
+
+    public static Game getGame() {
+        return game;
+    }
 
     public static void changeScene(String name, int width, int height)throws IOException{
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("/com/choppyfloppy/views/" + name));
@@ -47,6 +46,7 @@ public class Main extends Application {
             game = new Game(root, Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
             GameController gameController = loader.getController();
             gameController.init(scene);
+            game.start();
         }
 
         primaryStage.setTitle("ChoppyFloppy");

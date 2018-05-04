@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
-<?import com.choppyfloppy.views.gameovermenu.EndMenuTests?>
 
+
+<?import com.choppyfloppy.views.gameovermenu.EndMenu?>
 <GridPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.choppyfloppy.controllers.EndController">
-    <EndMenu fx:id="endMenuTests"></EndMenu>
+    <EndMenu fx:id="endMenu"></EndMenu>
 </GridPane>

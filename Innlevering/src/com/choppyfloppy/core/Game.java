@@ -147,7 +147,7 @@ public class Game extends GameEngine {
         Bullet bullet = new Bullet(bulletView, new Vector2D(player.getPosition().getX() + player.getBounds().getWidth() - 10, player.getPosition().getY() + player.getBounds().getHeight() - 10), new Rectangle(15,14), new Rectangle(0, 0, getWidth(), getHeight()));
         bullets.add(bullet);
         bullet.setVelocity(new Vector2D(normalizedX, normalizedY));
-        soundManager.playSound("sound/laser-shot.wav");
+        soundManager.playSound("laser-shot.wav");
     }
 
     private void createPlayer(){
@@ -181,7 +181,7 @@ public class Game extends GameEngine {
                 powerup.getPowerup(enemies);
                 powerup.setAlive(false);
                 scoreCount += 100;
-                soundManager.playSound("sound/power-up.wav");
+                soundManager.playSound("power-up.wav");
             }
         }
 
@@ -195,7 +195,7 @@ public class Game extends GameEngine {
                     killCount++;
                     Explosion explosion = new Explosion(explosionView, new Vector2D(enemy.getPosition().getX(), enemy.getPosition().getY()), new Rectangle(0,0));
                     explosions.add(explosion);
-                    soundManager.playSound("sound/explosion.wav");
+                    soundManager.playSound("explosion.wav");
                 }
             }
             if(enemy.isColliding(player)){
@@ -203,7 +203,7 @@ public class Game extends GameEngine {
                 playerLife--;
                 Explosion explosion = new Explosion(explosionView, new Vector2D(player.getPosition().getX(), player.getPosition().getY()), new Rectangle(0,0));
                 explosions.add(explosion);
-                soundManager.playSound("sound/explosion.wav");
+                soundManager.playSound("explosion.wav");
             }
         }
 
@@ -264,7 +264,7 @@ public class Game extends GameEngine {
         graphicsContext.fillText("Score: " + scoreCount + "\nLife: " + playerLife, 10, 20);
 
         if(playerLife <= 0) {
-            soundManager.playSound("sound/game-over.wav");
+            soundManager.playSound("game-over.wav");
             EndController.endGame();
             getGameLoop().stop();
         }

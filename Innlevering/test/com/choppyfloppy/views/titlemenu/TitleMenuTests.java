@@ -1,7 +1,7 @@
 package com.choppyfloppy.views.titlemenu;
 
 import com.choppyfloppy.util.FXTestHelper;
-import com.choppyfloppy.views.titlemenu.TitleMenu;
+
 
 import org.junit.BeforeClass;
 import org.junit.Test;

@@ -52,12 +52,12 @@ public class PowerUpCollection extends GameObject {
                 Main.getGame().getExplosions().add(explosion);
                 enemy.setAlive(false);
             }
-            Main.getGame().getSoundManager().playSound("sound/explosion.wav");
+            Main.getGame().getSoundManager().playSound("explosion.wav");
         }else if(randomizedReward == 2){
             for(Enemy enemy: enemies){
                 enemy.setFreeze(true);
             }
-            Main.getGame().getSoundManager().playSound("sound/freezing.wav");
+            Main.getGame().getSoundManager().playSound("freezing.wav");
         }else if(randomizedReward == 3){
             Main.getGame().setScoreCount(Main.getGame().getScoreCount() + 500);
         }
