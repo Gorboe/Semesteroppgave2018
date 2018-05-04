@@ -22,7 +22,7 @@ public class EndMenu extends VBox{
      */
     public EndMenu() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(EndMenu.class.getResource("gameOver.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(EndMenu.class.getResource("/com/choppyfloppy/views/gameovermenu/gameOver.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         fxmlLoader.setClassLoader(getClass().getClassLoader());
@@ -47,14 +47,14 @@ public class EndMenu extends VBox{
      * @param onMainMenuClicked - Is used to connect Main Menu Button in EndMenu
      * to Main Menu Button in gameOver.fxml
      */
-    public void setOnMainMenuClicked(Runnable onMainMenuClicked) { this.onMainMenuClicked = onMainMenuClicked; }
+    public void setOnMainMenuClicked(Runnable onMainMenuClicked) { this.onMainMenuClicked = Objects.requireNonNull(onMainMenuClicked); }
 
     /**
      * @param onExitClicked - Is used to connect Exit Button in EndMenu
      * to Exit Button in gameOver.fxml
      */
     public void setOnExitClicked(Runnable onExitClicked){
-        this.onExitClicked = onExitClicked;
+        this.onExitClicked = Objects.requireNonNull(onExitClicked);
     }
 
     @FXML

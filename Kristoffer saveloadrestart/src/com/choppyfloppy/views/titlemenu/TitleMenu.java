@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * TitleMenu contains the buttons for the Main Menu Menu, and the
@@ -21,7 +22,7 @@ public class TitleMenu extends VBox {
      */
     public TitleMenu() {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(TitleMenu.class.getResource("startMenu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(TitleMenu.class.getResource("/com/choppyfloppy/views/titlemenu/startMenu.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
         fxmlLoader.setClassLoader(getClass().getClassLoader());
@@ -39,20 +40,20 @@ public class TitleMenu extends VBox {
      * to New Game Button in startMenu.fxml
      */
     public void setOnNewGameClicked(Runnable onStartClicked) {
-        this.onNewGameClicked = onStartClicked;
+        this.onNewGameClicked = Objects.requireNonNull(onStartClicked);
     }
 
     /**
      * @param onContinueClicked - Is used to connect Continue Button in Main Menu
      * to Continue Button in startMenu.fxml
      */
-    public void setOnContinueClicked(Runnable onContinueClicked){this.onContinueClicked = onContinueClicked;}
+    public void setOnContinueClicked(Runnable onContinueClicked){this.onContinueClicked = Objects.requireNonNull(onContinueClicked);}
 
     /**
      * @param onExitClicked - Is used to connect Exit Button in Main Menu
      * to Exit Button in startMenu.fxml
      */
-    public void setOnExitClicked(Runnable onExitClicked){this.onExitClicked = onExitClicked;}
+    public void setOnExitClicked(Runnable onExitClicked){this.onExitClicked = Objects.requireNonNull(onExitClicked);}
 
     @FXML
     protected void newGameClicked(){

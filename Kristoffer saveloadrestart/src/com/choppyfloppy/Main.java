@@ -22,6 +22,7 @@ public class Main extends Application {
     private static Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
     public static final int SCREEN_WIDTH = (int)primaryScreenBounds.getMaxX();
     public static final int SCREEN_HEIGHT = (int)primaryScreenBounds.getMaxY();
+    private static Game game;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -30,7 +31,6 @@ public class Main extends Application {
         changeScene("titleview.fxml", SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
-    private static Game game;
     public static Game getGame() {
         return game;
     }
