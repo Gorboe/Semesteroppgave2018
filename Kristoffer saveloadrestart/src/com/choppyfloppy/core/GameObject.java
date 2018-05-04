@@ -23,7 +23,7 @@ public abstract class GameObject {
 
     /**
      * This is the constructor of the GameObject class
-     * @param imageView takes an Image and makes it easy to create
+     * @param imageView takes an Image and makes it easy to create game animations
      * @param position stores the GameObjects location on the game-board
      * @param bounds is the GameObjects "hit-box"
      */

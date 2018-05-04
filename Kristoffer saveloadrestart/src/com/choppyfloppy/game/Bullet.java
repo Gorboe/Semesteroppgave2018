@@ -37,7 +37,7 @@ public class Bullet extends GameObject {
     /**
      * setVelocity is used to set a value to the velocity variable.
      *
-     * @param velocity - is a varible that contains the speed of
+     * @param velocity - is a variable that contains the speed of
      *                 the bullet.
      */
     public void setVelocity(Vector2D velocity){this.velocity = Objects.requireNonNull(velocity);}
@@ -75,6 +75,7 @@ public class Bullet extends GameObject {
      *  The method draw is used to draw Bullets to the Canvas.
      *  Graphic Context uses drawImage to draw the Bullets Image and position.
      */
+    @Override
     public void draw(GraphicsContext gc) {
         gc.drawImage(getImageView().getImage(), getPosition().getX(), getPosition().getY());
     }
