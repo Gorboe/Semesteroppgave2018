@@ -1,0 +1,18 @@
+.menubutton{
+    -fx-background-color:
+            linear-gradient(#ff5400, #be1d00)
+            radial-gradient(center 50% -40%, radius 200%, #black 50%);
+    -fx-background-radius: 10, 10;
+    -fx-background-insets: 0, 20;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );
+    -fx-text-fill: Orange;
+    -fx-font-size: 15;
+    -fx-padding: 15px;
+    -fx-border-insets: 50px;
+}
+
+#pausemenu{
+    -fx-background-image: url("/com/choppyfloppy/resources/Menu/pause.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: stretch;
+}
