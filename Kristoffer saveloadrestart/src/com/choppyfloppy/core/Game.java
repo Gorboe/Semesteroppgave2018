@@ -49,17 +49,18 @@ public class Game extends GameEngine {
 
     /**
      * Constructor of the Game class
-     * @param parent is used to get the size of the window
+     * @param grid get its things from gameview.fxml, is the actual window
      * @param width is used to set the width of the Canvas
      * @param height is used to set the height of the Canvas
      */
-    public Game(GridPane parent, int width, int height){
-        super(parent, width, height);
+    public Game(GridPane grid, int width, int height){
+        super(grid, width, height);
         createContent();
     }
 
     /**
-     * Is used to access the explosions list
+     * Is used to access the explosions list to either add explosions
+     * to the game-board or to remove them.
      */
     public List<Explosion> getExplosions(){return explosions; }
 
@@ -69,7 +70,7 @@ public class Game extends GameEngine {
     public ImageView getExplosionView(){return explosionView;}
 
     /**
-     * Is used to access the soundManager
+     * Is used to access the soundManager and play sounds
      */
     public SoundManager getSoundManager(){return soundManager;}
 
@@ -125,7 +126,7 @@ public class Game extends GameEngine {
     }
 
     /**
-     * Used to access paused in Game
+     * Used to access paused in Game. and to pause the game
      */
     public boolean isPaused() {
         return paused;
