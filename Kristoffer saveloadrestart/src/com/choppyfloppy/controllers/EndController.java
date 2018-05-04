@@ -28,15 +28,15 @@ public class EndController {
         try{
             Main.changeScene("gameview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
         }catch(IOException exception){
-            System.out.println("feil");
+            exception.printStackTrace();
         }
     }
 
     private void mainMenuOnClick(){
         try{
             Main.changeScene("titleview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 
@@ -51,8 +51,8 @@ public class EndController {
         try {
             Main.changeScene("endview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
             Main.getGame().getGameLoop().stop();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 }

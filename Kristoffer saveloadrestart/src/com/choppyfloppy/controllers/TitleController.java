@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * TitleController controls the main menu and
@@ -36,6 +38,13 @@ public class TitleController {
     }
 
     private void continueOnClick(){
+
+        if (!Files.exists(Paths.get("saveFolder/save.txt"))) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Unable to load game, file not found. Please start a new game");
+            alert.show();
+            return;
+        }
+
         try {
             SaveData load = (SaveData) ResourceManager.loadGame("saveFolder/save.txt");
             Main.changeScene("gameview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
