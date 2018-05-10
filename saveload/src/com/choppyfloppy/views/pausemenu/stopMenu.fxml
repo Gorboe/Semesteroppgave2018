@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<fx:root xmlns="http://javafx.com/javafx" fx:id="pausemenu" xmlns:fx="http://javafx.com/fxml" type="javafx.scene.layout.VBox" stylesheets="@pause.css" alignment="CENTER">
+
+
+
+    <Button fx:id="resumeButton" styleClass="menubutton" mnemonicParsing="false" text="Resume Game" onAction="#resumeClicked"/>
+    <Button fx:id="restartButton" styleClass="menubutton" mnemonicParsing="false" text="Restart Level" onAction="#restartClicked"/>
+    <Button fx:id="saveButton" styleClass="menubutton" mnemonicParsing="false" text="Save Game" onAction="#saveClicked"/>
+    <Button fx:id="quitToMainMenuButton" styleClass="menubutton" mnemonicParsing="false" text="Main Menu" onAction="#quitToMainMenuClicked"/>
+    <Button fx:id="exitButton" styleClass="menubutton" mnemonicParsing="false" text="Exit Game" onAction="#exitClicked"/>
+
+</fx:root>
+
