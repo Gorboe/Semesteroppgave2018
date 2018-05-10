@@ -11,7 +11,7 @@
 
 
     <Button fx:id="newGameButton" styleClass="menubutton" mnemonicParsing="false" text="New Game" onAction="#newGameClicked" />
-    <Button fx:id="fortsettButton" styleClass="menubutton" mnemonicParsing="false" text="Continue Last Game" onAction="#continueClicked"/>
+    <Button fx:id="fortsettButton" styleClass="menubutton" mnemonicParsing="false" text="Load Game" onAction="#continueClicked"/>
     <Button fx:id="exitButton" styleClass="menubutton" mnemonicParsing="false" text="Exit Game" onAction="#exitClicked"/>
 
 </fx:root>

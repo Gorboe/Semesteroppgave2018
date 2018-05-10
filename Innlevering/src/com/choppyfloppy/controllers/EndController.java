@@ -9,7 +9,7 @@ import java.io.IOException;
 
 
 /**
- * EndController handles interaction between the view and the model "game"
+ * EndController handles interaction between the view and the model "game".
  */
 public class EndController {
 

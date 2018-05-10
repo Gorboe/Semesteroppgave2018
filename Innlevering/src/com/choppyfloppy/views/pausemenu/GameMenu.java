@@ -8,10 +8,12 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
- * GameMenu contains the buttons for the Pause menu, and the
+ * GameMenu is a custom control that inherits and extends VBOX.
+ * Contains the buttons for the Pause menu, and the
  * method for loading the fxml.
  */
 public class GameMenu extends VBox {
+
 
         private Runnable onResumeClicked;
         private Runnable onRestartClicked;

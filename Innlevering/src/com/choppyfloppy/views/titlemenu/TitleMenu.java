@@ -8,7 +8,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
- * TitleMenu contains the buttons for the Main Menu Menu, and the
+ * TitleMenu is a custom control that inherits and extends VBOX.
+ * Contains the buttons for the Pause menu, and the
  * method for loading the fxml.
  */
 public class TitleMenu extends VBox {

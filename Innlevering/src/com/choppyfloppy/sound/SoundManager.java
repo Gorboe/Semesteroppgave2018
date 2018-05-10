@@ -13,20 +13,16 @@ public class SoundManager {
 
     /**
      * The Method playSound is used to retrieve sound files,
-     * give file to audio player and then start the AudioPlayer to
+     * give file to audio clip and then start the AudioClip to
      * run sound file.
      *
      * @param filePath - stores the string value of the sound location.
      */
 
-
-
     public void playSound(String filePath){
         Objects.requireNonNull(filePath);
         try{
-            //InputStream inputStream = new FileInputStream(new File("com/choppyfloppy/soundfiles/"+filePath));
             String inputStream = SoundManager.class.getResource("/com/choppyfloppy/soundfiles/"+filePath).toExternalForm();
-
             AudioClip audioClip = new AudioClip(inputStream);
             audioClip.play();
         }catch (Exception e){

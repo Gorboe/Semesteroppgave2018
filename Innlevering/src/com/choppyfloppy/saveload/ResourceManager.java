@@ -16,10 +16,12 @@ public class ResourceManager {
     /**
      * SaveGame method serializes the given class to the file in fileName
      * and is used to save values to file.
+     * The method takes class of type T that inherits from Serializable.
+     * savegame takes an instance of the type T as a parameter.
      *
      * @param fileName - contains the filename to which the value is saved
      */
-    public static void saveGame(Serializable data, String fileName) throws IOException {
+    public static <T extends Serializable> void saveGame(T data, String fileName) throws IOException {
         try(ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)))){
             oos.writeObject(data);
         }
@@ -28,12 +30,13 @@ public class ResourceManager {
     /**
      * LoadGame method loads value from file and returns value to class/
      * method when called.
+     * The method uses generic programming to return the class.
      *
      * @param fileName - contains the filename to which the value is saved
      */
-    public static Object loadGame(String fileName) throws IOException, ClassNotFoundException{
+    public static <T extends Serializable> T loadGame(String fileName, Class<T> clazz) throws IOException, ClassNotFoundException{
         try(ObjectInputStream ois = new ObjectInputStream(Files.newInputStream(Paths.get(fileName)))){
-            return ois.readObject();
+            return clazz.cast(ois.readObject());
         }
     }
 }

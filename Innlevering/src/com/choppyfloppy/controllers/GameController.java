@@ -1,7 +1,8 @@
 package com.choppyfloppy.controllers;
 
 import com.choppyfloppy.Main;
-import com.choppyfloppy.saveload.ResourceManager;
+import com.choppyfloppy.saveload.ProgressManager;
+import com.choppyfloppy.saveload.ProgressManagerFX;
 import com.choppyfloppy.saveload.SaveData;
 import com.choppyfloppy.views.pausemenu.GameMenu;
 import javafx.application.Platform;
@@ -15,8 +16,9 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
- * GameController handles interaction between the view and the model "game".
- * It handles the initialization of the stopMenu.fxml.
+ * GameController is the controller that
+ * handles interaction between the view
+ * and the model "game".
  */
 public class GameController {
 
@@ -24,7 +26,7 @@ public class GameController {
     @FXML private GridPane root;
 
     /**
-     * Creates a KeyEvent that pauses the "game" and brings up
+     * Contains a KeyEvent that pauses the game loop and brings up
      * the pausemenu by setting it to visible when you press
      * escape.
      *
@@ -69,7 +71,7 @@ public class GameController {
             Main.getGame().setLevelCount(currentLevel);
             Main.getGame().setScoreCount(currentScore);
         }catch(IOException exception){
-            System.out.println("feil");
+            System.out.println("error,unable to restart level");
         }
         gameMenu.setVisible(false);
     }
@@ -79,9 +81,10 @@ public class GameController {
         data.setCurrentLevel(Main.getGame().getLevelCount());
         data.setScore(Main.getGame().getScoreCount());
         try {
-            ResourceManager.saveGame(data, "saveFolder/save.txt");
-        } catch (IOException ev) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Unable to save game");
+            ProgressManager progressManager = new ProgressManagerFX();
+            progressManager.save(data);
+        } catch (IOException exception) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "error, unable to save game");
             alert.show();
         }
     }
