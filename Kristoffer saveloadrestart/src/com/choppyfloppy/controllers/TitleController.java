@@ -1,7 +1,8 @@
 package com.choppyfloppy.controllers;
 
 import com.choppyfloppy.Main;
-import com.choppyfloppy.saveload.ResourceManager;
+import com.choppyfloppy.saveload.ProgressManager;
+import com.choppyfloppy.saveload.ProgressManagerFX;
 import com.choppyfloppy.saveload.SaveData;
 import com.choppyfloppy.views.titlemenu.TitleMenu;
 import javafx.application.Platform;
@@ -9,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
@@ -25,7 +25,7 @@ public class TitleController {
      */
     @FXML public void initialize(){
         titleMenu.setOnNewGameClicked(this::newGameOnClick);
-        titleMenu.setOnContinueClicked(this::continueOnClick);
+        titleMenu.setOnLoadClicked(this::loadOnClick);
         titleMenu.setOnExitClicked(this::exitOnClick);
     }
 
@@ -37,19 +37,20 @@ public class TitleController {
         }
     }
 
-    private void continueOnClick(){
-
-        if (!Files.exists(Paths.get("saveFolder/save.txt"))) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Unable to load game, file not found. Please start a new game");
-            alert.show();
-            return;
-        }
-
+    private void loadOnClick(){
         try {
-            SaveData load = (SaveData) ResourceManager.loadGame("saveFolder/save.txt");
-            Main.changeScene("gameview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
-            Main.getGame().setScoreCount(load.getScore());
-            Main.getGame().setLevelCount(load.getCurrentLevel());
+            if (!ProgressManagerFX.isDirEmpty(Paths.get("/saveFolder"))) {
+                ProgressManager progressManager = new ProgressManagerFX();
+                SaveData load = progressManager.load();
+                if (load != null) {
+                    Main.changeScene("gameview.fxml", Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT);
+                    Main.getGame().setScoreCount(load.getScore());
+                    Main.getGame().setLevelCount(load.getCurrentLevel());
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "No files available, please start a new game");
+                alert.show();
+            }
         } catch (IOException | ClassNotFoundException exception) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Unable to load game. File Corrupt");
             alert.show();

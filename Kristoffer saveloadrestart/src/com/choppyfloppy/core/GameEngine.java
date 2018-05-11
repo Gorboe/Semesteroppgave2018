@@ -70,6 +70,10 @@ public abstract class GameEngine {
                 draw();
             }
         };
+
+    }
+
+    public void start(){
         gameLoop.start();
     }
 

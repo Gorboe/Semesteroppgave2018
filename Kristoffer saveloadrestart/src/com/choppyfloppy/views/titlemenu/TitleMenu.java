@@ -8,13 +8,14 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
- * TitleMenu contains the buttons for the Main Menu Menu, and the
+ * TitleMenu is a custom control that inherits and extends VBOX.
+ * Contains the buttons for the Pause menu, and the
  * method for loading the fxml.
  */
 public class TitleMenu extends VBox {
 
     private Runnable onNewGameClicked;
-    private Runnable onContinueClicked;
+    private Runnable onLoadClicked;
     private Runnable onExitClicked;
 
     /**
@@ -47,7 +48,7 @@ public class TitleMenu extends VBox {
      * @param onContinueClicked - Is used to connect Continue Button in Main Menu
      * to Continue Button in startMenu.fxml
      */
-    public void setOnContinueClicked(Runnable onContinueClicked){this.onContinueClicked = Objects.requireNonNull(onContinueClicked);}
+    public void setOnLoadClicked(Runnable onContinueClicked){this.onLoadClicked = Objects.requireNonNull(onContinueClicked);}
 
     /**
      * @param onExitClicked - Is used to connect Exit Button in Main Menu
@@ -63,9 +64,9 @@ public class TitleMenu extends VBox {
     }
 
     @FXML
-    protected void continueClicked(){
-        if(onContinueClicked != null){
-            onContinueClicked.run();
+    protected void loadClicked(){
+        if(onLoadClicked != null){
+            onLoadClicked.run();
         }
     }
 

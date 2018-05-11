@@ -19,9 +19,9 @@ public class TitleMenuTests {
     }
 
     @Test (expected = NullPointerException.class)
-    public void setOnContinueClickedCanNotBeNull() {
+    public void setOnLoadClickedCanNotBeNull() {
         TitleMenu titleMenu = new TitleMenu();
-        titleMenu.setOnContinueClicked(null);
+        titleMenu.setOnLoadClicked(null);
     }
 
     @Test (expected = NullPointerException.class)

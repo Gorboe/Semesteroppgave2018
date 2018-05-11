@@ -8,7 +8,8 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
- * EndMenu contains the buttons for the End Game Menu, and the
+ * EndMenu is a custom control that inherits and extends VBOX.
+ * Contains the buttons for the EndGame menu, and the
  * method for loading the fxml.
  */
 public class EndMenu extends VBox{

@@ -1,12 +1,10 @@
 package com.choppyfloppy.sound;
 
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+
+
 import java.util.Objects;
+import javafx.scene.media.AudioClip;
 
 /**
  * SoundManager is used to manage every sound in the game.
@@ -15,17 +13,18 @@ public class SoundManager {
 
     /**
      * The Method playSound is used to retrieve sound files,
-     * give file to audio player and then start the AudioPlayer to
+     * give file to audio clip and then start the AudioClip to
      * run sound file.
      *
      * @param filePath - stores the string value of the sound location.
      */
+
     public void playSound(String filePath){
         Objects.requireNonNull(filePath);
         try{
-            InputStream inputStream = new FileInputStream(new File(filePath));
-            AudioStream audioStream = new AudioStream(inputStream);
-            AudioPlayer.player.start(audioStream);
+            String inputStream = SoundManager.class.getResource("/com/choppyfloppy/soundfiles/"+filePath).toExternalForm();
+            AudioClip audioClip = new AudioClip(inputStream);
+            audioClip.play();
         }catch (Exception e){
             System.out.println("Error playSound");
         }
