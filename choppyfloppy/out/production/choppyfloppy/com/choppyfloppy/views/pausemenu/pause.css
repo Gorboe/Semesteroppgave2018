@@ -9,6 +9,7 @@
     -fx-font-size: 15;
     -fx-padding: 15px;
     -fx-border-insets: 50px;
+    -fx-pref-width: 200px;
 }
 
 #pausemenu{

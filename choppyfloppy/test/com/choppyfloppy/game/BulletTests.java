@@ -41,6 +41,4 @@ public class BulletTests {
         bullet.draw(null);
     }
 
-
-
 }
